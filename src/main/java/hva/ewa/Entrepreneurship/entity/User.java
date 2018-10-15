@@ -12,6 +12,8 @@ public class User {
     private String lastname;
     private String email;
     private String password;
+    private String role;
+    private String teacher;
 
     public String getFirstname() {
         return firstname;
@@ -43,5 +45,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(String teacher) {
+        this.teacher = teacher;
     }
 }

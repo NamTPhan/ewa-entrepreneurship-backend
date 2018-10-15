@@ -30,6 +30,8 @@ public class SampleController {
         user.setLastname(user.getLastname());
         user.setEmail(user.getEmail());
         user.setPassword(user.getPassword());
+        user.setRole(user.getRole());
+        user.setTeacher(user.getTeacher());
         userRepository.save(user);
 
         return user;
@@ -38,8 +40,8 @@ public class SampleController {
     @RequestMapping(method = RequestMethod.GET, value = "/getuser")
     public List<User> existingUser(User user) {
 
-        List<User> userList = userRepository.findAllUsers(user.getEmail(), user.getPassword());
-        System.out.println(userRepository.findAllUsers(user.getEmail(), user.getPassword()));
+        List<User> userList = userRepository.findAllUsers(user.getEmail(), user.getPassword(), user.getRole());
+        System.out.println(userRepository.findAllUsers(user.getEmail(), user.getPassword(), user.getRole()));
 
         return userList;
     }
