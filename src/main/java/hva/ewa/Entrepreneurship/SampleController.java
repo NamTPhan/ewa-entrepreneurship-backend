@@ -4,7 +4,7 @@ import hva.ewa.Entrepreneurship.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Connection;
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
@@ -33,6 +33,15 @@ public class SampleController {
         userRepository.save(user);
 
         return user;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getuser")
+    public List<User> existingUser(User user) {
+
+        List<User> userList = userRepository.findAllUsers(user.getEmail(), user.getPassword());
+        System.out.println(userRepository.findAllUsers(user.getEmail(), user.getPassword()));
+
+        return userList;
     }
 
 
