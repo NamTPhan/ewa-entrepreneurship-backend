@@ -1,4 +1,4 @@
-package hva.ewa.Entrepreneurship.entity;
+package hva.ewa.Entrepreneurship.model;
 
 public class Result {
     private Integer result_id;

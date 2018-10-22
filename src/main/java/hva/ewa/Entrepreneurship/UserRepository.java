@@ -1,5 +1,5 @@
 package hva.ewa.Entrepreneurship;
-import hva.ewa.Entrepreneurship.entity.User;
+import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
