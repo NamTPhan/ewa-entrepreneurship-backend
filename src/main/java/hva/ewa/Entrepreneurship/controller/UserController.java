@@ -1,5 +1,6 @@
-package hva.ewa.Entrepreneurship;
+package hva.ewa.Entrepreneurship.controller;
 
+import hva.ewa.Entrepreneurship.UserRepository;
 import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/entrepreneurship")
-public class SampleController {
+public class UserController {
 
     @Autowired
     private UserRepository userRepository;
@@ -46,5 +47,13 @@ public class SampleController {
         return userList;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/getemaillist")
+    public List<User> existingEmail(User user) {
+
+        List<User> emailList = userRepository.findAllEmail(user.getEmail());
+        System.out.println(userRepository.findAllEmail(user.getEmail()));
+
+        return emailList;
+    }
 
 }
