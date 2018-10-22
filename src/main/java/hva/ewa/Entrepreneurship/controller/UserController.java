@@ -46,4 +46,14 @@ public class UserController {
 
         return userList;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getemaillist")
+    public List<User> existingEmail(User user) {
+
+        List<User> emailList = userRepository.findAllEmail(user.getEmail());
+        System.out.println(userRepository.findAllEmail(user.getEmail()));
+
+        return emailList;
+    }
+
 }
