@@ -1,6 +1,6 @@
 package hva.ewa.Entrepreneurship;
 
-import hva.ewa.Entrepreneurship.entity.User;
+import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
