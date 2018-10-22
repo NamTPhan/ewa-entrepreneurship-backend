@@ -1,6 +1,6 @@
 package hva.ewa.Entrepreneurship.controller;
 
-import hva.ewa.Entrepreneurship.UserRepository;
+import hva.ewa.Entrepreneurship.repository.UserRepository;
 import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,27 +12,22 @@ import java.util.List;
 @RequestMapping("/entrepreneurship")
 public class UserController {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/json")
-    public String returnJSON() {
-
-        String hello = "hello";
-
-        return hello;
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/user")
     public User getUser(@RequestBody User user) {
 
-        System.out.println("User: " + user.getFirstname() + ", " + user.getLastname() + ", " + user.getEmail() + ", " + user.getPassword());
-        user.setFirstname(user.getFirstname());
-        user.setLastname(user.getLastname());
-        user.setEmail(user.getEmail());
-        user.setPassword(user.getPassword());
-        user.setRole(user.getRole());
-        user.setTeacher(user.getTeacher());
+//        System.out.println("User: " + user.getFirstname() + ", " + user.getLastname() + ", " + user.getEmail() + ", " + user.getPassword());
+//        user.setFirstname(user.getFirstname());
+//        user.setLastname(user.getLastname());
+//        user.setEmail(user.getEmail());
+//        user.setPassword(user.getPassword());
+//        user.setRole(user.getRole());
+//        user.setTeacher(user.getTeacher());
         userRepository.save(user);
 
         return user;
@@ -50,10 +45,10 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, value = "/getemaillist")
     public List<User> existingEmail(User user) {
 
-        List<User> emailList = userRepository.findAllEmail(user.getEmail());
-        System.out.println(userRepository.findAllEmail(user.getEmail()));
+//        List<User> emailList = );
+//        System.out.println(userRepository.findAllEmail(user.getEmail()));
 
-        return emailList;
+        return userRepository.findAllEmail(user.getEmail());
     }
 
 }
