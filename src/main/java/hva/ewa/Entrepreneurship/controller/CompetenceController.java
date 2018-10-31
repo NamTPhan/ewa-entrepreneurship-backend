@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/entrepreneurship")
+@RequestMapping("/api")
 public class CompetenceController {
 
     @Autowired

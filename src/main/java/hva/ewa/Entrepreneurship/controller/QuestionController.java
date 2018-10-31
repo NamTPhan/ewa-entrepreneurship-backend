@@ -12,13 +12,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/entrepreneurship")
+@RequestMapping("/api")
 public class QuestionController {
 
     @Autowired
     private QuestionRepository questionRepository;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getquestions")
+    @RequestMapping(method = RequestMethod.GET, value = "/questions")
     public List<Question> getAllQuestions(Question question) {
 
         List<Question> questionList = questionRepository.findAllQuestions(question.getQuestion_id(), question.getDescriptiontext(), question.getCompetence_id());

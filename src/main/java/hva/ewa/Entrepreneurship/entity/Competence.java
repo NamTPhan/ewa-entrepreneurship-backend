@@ -3,7 +3,7 @@ package hva.ewa.Entrepreneurship.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "competence")
@@ -17,8 +17,9 @@ public class Competence {
     @Size(max = 150)
     private String competence;
 
-//    @OneToMany(mappedBy = "competenceEntity")
-//    private Set<Question> question;
+//    @OneToMany
+//    @JoinColumn(name = "competence_id")
+//    private List<Question> question;
 
     public Integer getCompetence_id() {
         return competence_id;
