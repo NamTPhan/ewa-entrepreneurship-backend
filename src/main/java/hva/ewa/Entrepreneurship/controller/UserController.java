@@ -9,51 +9,49 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/entrepreneurship")
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/json")
-    public String returnJSON() {
+//    @RequestMapping(method = RequestMethod.GET, value = "/json")
+//    public String returnJSON() {
+//
+//        String hello = "hello";
+//
+//        return hello;
+//    }
 
-        String hello = "hello";
-
-        return hello;
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/user")
+    @RequestMapping(method = RequestMethod.POST, value = "/users/update")
     public User getUser(@RequestBody User user) {
 
-        System.out.println("User: " + user.getFirstname() + ", " + user.getLastname() + ", " + user.getEmail() + ", " + user.getPassword());
-        user.setFirstname(user.getFirstname());
-        user.setLastname(user.getLastname());
-        user.setEmail(user.getEmail());
-        user.setPassword(user.getPassword());
-        user.setRole(user.getRole());
-        user.setTeacher(user.getTeacher());
+//        System.out.println("User: " + user.getFirstname() + ", " + user.getLastname() + ", " + user.getEmail() + ", " + user.getPassword());
+//        user.setFirstname(user.getFirstname());
+//        user.setLastname(user.getLastname());
+//        user.setEmail(user.getEmail());
+//        user.setPassword(user.getPassword());
+//        user.setRole(user.getRole());
+//        user.setTeacher(user.getTeacher());
         userRepository.save(user);
 
         return user;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getuser")
+    @RequestMapping(method = RequestMethod.GET, value = "/users")
     public List<User> existingUser(User user) {
 
-        List<User> userList = userRepository.findAllUsers(user.getEmail(), user.getPassword(), user.getRole());
-        System.out.println(userRepository.findAllUsers(user.getEmail(), user.getPassword(), user.getRole()));
+//        System.out.println(userRepository.findAllUsers(user.getEmail(), user.getPassword(), user.getRole()));
 
-        return userList;
+        return userRepository.findAllUsers(user.getEmail(), user.getPassword(), user.getRole());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getemaillist")
+    @RequestMapping(method = RequestMethod.GET, value = "/users/emails")
     public List<User> existingEmail(User user) {
 
-        List<User> emailList = userRepository.findAllEmail(user.getEmail());
-        System.out.println(userRepository.findAllEmail(user.getEmail()));
+//        System.out.println(userRepository.findAllEmail(user.getEmail()));
 
-        return emailList;
+        return userRepository.findAllEmail(user.getEmail());
     }
 
 }
