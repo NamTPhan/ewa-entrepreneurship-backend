@@ -16,21 +16,21 @@ public class Question {
     @Size(max = 255)
     private String descriptiontext;
 
-    @Column(insertable = false, updatable = false)
+//    @Column(insertable = false, updatable = false)
     @NotNull
     private Integer competence_id;
 
-    @ManyToOne
-    @JoinColumn(name = "competence_id", nullable = false)
-    private Competence competenceEntity;
-
-    public Competence getCompetenceEntity() {
-        return competenceEntity;
-    }
-
-    public void setCompetenceEntity(Competence competenceEntity) {
-        this.competenceEntity = competenceEntity;
-    }
+//    @ManyToOne
+//    @JoinColumn(name = "competence_id", nullable = false)
+//    private Competence competenceEntity;
+//
+//    public Competence getCompetenceEntity() {
+//        return competenceEntity;
+//    }
+//
+//    public void setCompetenceEntity(Competence competenceEntity) {
+//        this.competenceEntity = competenceEntity;
+//    }
 
     public Integer getQuestion_id() {
         return question_id;
@@ -40,11 +40,11 @@ public class Question {
         this.question_id = question_id;
     }
 
-    public String getDescription_text() {
+    public String getDescriptiontext() {
         return descriptiontext;
     }
 
-    public void setDescriptionText(String descriptiontext) {
+    public void setDescriptiontext(String descriptiontext) {
         this.descriptiontext = descriptiontext;
     }
 

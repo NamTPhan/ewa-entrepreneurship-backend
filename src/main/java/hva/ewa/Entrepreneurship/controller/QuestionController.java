@@ -21,7 +21,9 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.GET, value = "/getquestions")
     public List<Question> getAllQuestions(Question question) {
 
-        List<Question> questionList = questionRepository.findAllQuestions(question.getQuestion_id(), question.getDescription_text(), question.getCompetence_id());
+        List<Question> questionList = questionRepository.findAllQuestions(question.getQuestion_id(), question.getDescriptiontext(), question.getCompetence_id());
+
+        System.out.println(questionList.size()); // For testing
 
         return questionList;
     }

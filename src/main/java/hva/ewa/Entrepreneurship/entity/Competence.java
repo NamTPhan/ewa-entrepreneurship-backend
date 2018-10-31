@@ -17,8 +17,8 @@ public class Competence {
     @Size(max = 150)
     private String competence;
 
-    @OneToMany(mappedBy = "competenceEntity")
-    private Set<Question> question;
+//    @OneToMany(mappedBy = "competenceEntity")
+//    private Set<Question> question;
 
     public Integer getCompetence_id() {
         return competence_id;
