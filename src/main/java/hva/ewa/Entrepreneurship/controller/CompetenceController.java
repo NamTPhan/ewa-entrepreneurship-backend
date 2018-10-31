@@ -1,7 +1,7 @@
 package hva.ewa.Entrepreneurship.controller;
 
 import hva.ewa.Entrepreneurship.CompetenceRepository;
-import hva.ewa.Entrepreneurship.entity.Competence;
+import hva.ewa.Entrepreneurship.model.Competence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
