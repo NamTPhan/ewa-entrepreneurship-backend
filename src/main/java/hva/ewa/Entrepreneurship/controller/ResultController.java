@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class ResultController {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/result")
+    @RequestMapping(method = RequestMethod.GET, value = "/results/users")
     public List<User> getResults(Result result) {
 
         return null;
