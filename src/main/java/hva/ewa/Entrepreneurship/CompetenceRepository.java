@@ -9,6 +9,12 @@ import java.util.List;
 // CRUD refers Create, Read, Update, Delete
 public interface CompetenceRepository extends CrudRepository<Competence, Integer> {
 
-    @Query("SELECT competence_id, competence FROM Competence")
-    List<Competence> findAllCompetences(Integer competence_id, String competence);
+    @Query("SELECT competence_id, competence, competence_type FROM Competence")
+    List<Competence> findAllCompetences(Integer competence_id, String competence, String competence_type);
+
+    @Query("SELECT competence_id, competence, competence_type FROM Competence WHERE competence_type = 'sub'")
+    List<Competence> findAllSubCompetences(Integer competence_id, String competence, String competence_type);
+
+    @Query("SELECT competence_id, competence, competence_type FROM Competence WHERE competence_type = 'main'")
+    List<Competence> findAllMainCompetences(Integer competence_id, String competence, String competence_type);
 }

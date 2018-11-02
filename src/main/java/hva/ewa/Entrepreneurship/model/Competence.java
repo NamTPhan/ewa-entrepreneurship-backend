@@ -17,6 +17,9 @@ public class Competence {
     @Size(max = 150)
     private String competence;
 
+    @NotNull
+    private String competence_type;
+
 //    @OneToMany
 //    @JoinColumn(name = "competence_id")
 //    private List<Question> question;
@@ -35,5 +38,13 @@ public class Competence {
 
     public void setCompetence(String competence) {
         this.competence = competence;
+    }
+
+    public String getCompetence_type() {
+        return competence_type;
+    }
+
+    public void setCompetence_type(String competence_type) {
+        this.competence_type = competence_type;
     }
 }

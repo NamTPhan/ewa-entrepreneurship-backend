@@ -21,8 +21,24 @@ public class CompetenceController {
     @RequestMapping(method = RequestMethod.GET, value = "/competences")
     public List<Competence> getAllCompetences(Competence competence) {
 
-        List<Competence> competenceList = competenceRepository.findAllCompetences(competence.getCompetence_id(), competence.getCompetence());
+        List<Competence> competenceList = competenceRepository.findAllCompetences(competence.getCompetence_id(), competence.getCompetence(), competence.getCompetence_type());
 
         return competenceList;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/competences/sub-competences")
+    public List<Competence> getAllSubCompetences(Competence competence) {
+
+        List<Competence> subCompetenceList = competenceRepository.findAllSubCompetences(competence.getCompetence_id(), competence.getCompetence(), competence.getCompetence_type());
+
+        return subCompetenceList;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/competences/main-competences")
+    public List<Competence> getAllMainCompetences(Competence competence) {
+
+        List<Competence> mainCompetenceList = competenceRepository.findAllMainCompetences(competence.getCompetence_id(), competence.getCompetence(), competence.getCompetence_type());
+
+        return mainCompetenceList;
     }
 }
