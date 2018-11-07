@@ -1,4 +1,5 @@
-package hva.ewa.Entrepreneurship;
+package hva.ewa.Entrepreneurship.repository;
+import hva.ewa.Entrepreneurship.model.Result;
 import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,4 +17,6 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("SELECT email FROM User")
     List<User> findAllEmail(String email);
 
+//    @Query("SELECT .. FROM Result WHERE user_id = 2")
+//    List<Result> findResults(String result);
 }
