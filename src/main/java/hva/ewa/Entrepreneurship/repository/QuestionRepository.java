@@ -1,4 +1,4 @@
-package hva.ewa.Entrepreneurship;
+package hva.ewa.Entrepreneurship.repository;
 import hva.ewa.Entrepreneurship.model.Question;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

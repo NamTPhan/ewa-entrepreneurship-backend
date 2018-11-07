@@ -1,6 +1,6 @@
 package hva.ewa.Entrepreneurship.controller;
 
-import hva.ewa.Entrepreneurship.QuestionRepository;
+import hva.ewa.Entrepreneurship.repository.QuestionRepository;
 import hva.ewa.Entrepreneurship.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

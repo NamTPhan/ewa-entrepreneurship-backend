@@ -1,16 +1,20 @@
 package hva.ewa.Entrepreneurship.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "competence")
-public class Competence {
+public class Competence implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Does auto increment checked
+    @Column(insertable = false, updatable = false)
     private Integer competence_id;
 
     @NotNull
@@ -20,7 +24,12 @@ public class Competence {
     @NotNull
     private String competence_type;
 
-//    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "competence_id")
+    @JsonIgnore
+    private List<Competence> competences;
+
+    //    @OneToMany
 //    @JoinColumn(name = "competence_id")
 //    private List<Question> question;
 
