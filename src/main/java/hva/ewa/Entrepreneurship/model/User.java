@@ -33,10 +33,10 @@ public class User implements Serializable {
     @NotNull
     private String teacher;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @JsonIgnore
-    private List<User> users;
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id")
+//    @JsonIgnore
+//    private List<User> users;
 
     public Integer getId() {
         return id;

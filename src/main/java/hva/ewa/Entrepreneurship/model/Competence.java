@@ -24,10 +24,10 @@ public class Competence implements Serializable {
     @NotNull
     private String competence_type;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "competence_id")
-    @JsonIgnore
-    private List<Competence> competences;
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "competence_id")
+//    @JsonIgnore
+//    private List<Competence> competences;
 
     //    @OneToMany
 //    @JoinColumn(name = "competence_id")

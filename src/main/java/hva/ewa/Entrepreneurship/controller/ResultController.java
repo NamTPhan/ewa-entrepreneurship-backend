@@ -14,6 +14,10 @@ public class ResultController {
 
     private ResultRepository resultRepository;
 
+    public ResultController(ResultRepository resultRepository) {
+        this.resultRepository = resultRepository;
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/results/users")
     public List<User> getResults(Result result) {
 
