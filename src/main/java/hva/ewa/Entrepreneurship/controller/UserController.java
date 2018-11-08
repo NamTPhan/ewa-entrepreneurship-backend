@@ -3,6 +3,8 @@ package hva.ewa.Entrepreneurship.controller;
 import hva.ewa.Entrepreneurship.UserRepository;
 import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +26,7 @@ public class UserController {
 //    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users/update")
-    public User getUser(@RequestBody User user) {
+    public ResponseEntity<String> getUser(@RequestBody User user) {
 
 //        System.out.println("User: " + user.getFirstname() + ", " + user.getLastname() + ", " + user.getEmail() + ", " + user.getPassword());
 //        user.setFirstname(user.getFirstname());
@@ -34,8 +36,9 @@ public class UserController {
 //        user.setRole(user.getRole());
 //        user.setTeacher(user.getTeacher());
         userRepository.save(user);
+        //return new ResponseEntity<>("Status is OK", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
 
-        return user;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/users")
