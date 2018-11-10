@@ -18,10 +18,20 @@ public class ResultController {
         this.resultRepository = resultRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/results/users")
-    public List<User> getResults(Result result) {
+    @RequestMapping(method = RequestMethod.GET, value = "/results/user")
+    public List<Result> getResults(Result result) {
 
-        return null;
+        List<Result> resultList = resultRepository.getAllResults(result.getUser_id(), result.getCompetence_id(), result.getScore());
+
+        return resultList;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/results/scores")
+    public List<Result> orderResultsScore(Result result) {
+
+        List<Result> scoreList = resultRepository.getOrderedScores(result.getUser_id(), result.getCompetence_id(), result.getScore());
+
+        return scoreList;
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/results/testscore")
