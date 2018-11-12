@@ -70,6 +70,8 @@ public class TokenAuthenticationFilter extends UsernamePasswordAuthenticationFil
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
+        response.addHeader("Access-Control-Expose-Headers", "Authorization");
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + JWT);
+
     }
 }
