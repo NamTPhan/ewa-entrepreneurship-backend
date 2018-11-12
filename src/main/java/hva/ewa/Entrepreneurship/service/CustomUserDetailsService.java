@@ -43,8 +43,8 @@ public class CustomUserDetailsService implements UserDetailsService {
      * @return user's credentials which includes their email address (username), password and role
      */
     private UserDetails userDetails(User user) {
-        //return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password("{noop}" + user.getPassword()).roles(user.getRole()).build();
-        return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword()).roles(user.getRole()).build();
+        return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password("{noop}" + user.getPassword()).roles(user.getRole()).build();
+        //return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword()).roles(user.getRole()).build();
 
     }
 }
