@@ -53,14 +53,20 @@ public class UserController {
         return new ResponseEntity<User>(HttpStatus.OK);
     }
 
-    //replaced by createUser
-    @RequestMapping(method = RequestMethod.POST, value = "/users/update")
-    public ResponseEntity<String> getUser(@RequestBody User user) {
-
-        userRepository.save(user);
-        return new ResponseEntity<>(HttpStatus.OK);
-
-    }
+//    @RequestMapping(method = RequestMethod.POST, value = "/login")
+//    public ResponseEntity<User> login(@RequestBody User user) {
+//
+//        User currentUser = userRepository.findByUserEmail(user.getEmail());
+//
+//        if (currentUser.getEmail().equals(user.getEmail()) && currentUser.getPassword().equals(user.getPassword())) {
+//            return new ResponseEntity<User>(user, HttpStatus.OK);
+//        }
+//        else {
+//            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+//        }
+//
+//
+//    }
 
     //Can be removed
     @RequestMapping(method = RequestMethod.GET, value = "/users")
