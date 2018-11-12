@@ -3,6 +3,8 @@ package hva.ewa.Entrepreneurship.controller;
 import hva.ewa.Entrepreneurship.model.Result;
 import hva.ewa.Entrepreneurship.model.User;
 import hva.ewa.Entrepreneurship.repository.ResultRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,25 +15,34 @@ import java.util.List;
 public class ResultController {
 
     private ResultRepository resultRepository;
+    private List<Result> resultList, scoreList;
+    private boolean conflictStatus = false;
 
     public ResultController(ResultRepository resultRepository) {
         this.resultRepository = resultRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/results/user")
-    public List<Result> getResults(Result result) {
+    @RequestMapping(method = RequestMethod.GET, value = "/results/user/{user_id}")
+    public ResponseEntity getResults(Result result, @PathVariable("user_id") Integer user_id) {
 
-        List<Result> resultList = resultRepository.getAllResults(result.getUser_id(), result.getCompetence_id(), result.getScore());
+        if (resultRepository.doesUserHasResult(user_id)) {
+            conflictStatus = true;
+            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
 
-        return resultList;
+        resultList = resultRepository.getAllResults(user_id);
+
+        return new ResponseEntity<>(resultList, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/results/scores")
-    public List<Result> orderResultsScore(Result result) {
+    @RequestMapping(method = RequestMethod.GET, value = "/results/scores/{user_id}")
+    public ResponseEntity orderResultsScore(Result result, @PathVariable("user_id") Integer user_id) {
 
-        List<Result> scoreList = resultRepository.getOrderedScores(result.getUser_id(), result.getCompetence_id(), result.getScore());
+        if (!conflictStatus){
+            scoreList = resultRepository.getOrderedScores(user_id);
+        }
 
-        return scoreList;
+        return new ResponseEntity<>(scoreList, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/results/testscore")
