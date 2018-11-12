@@ -16,31 +16,30 @@ public class ResultController {
 
     private ResultRepository resultRepository;
     private List<Result> resultList, scoreList;
-    private boolean conflictStatus = false;
 
     public ResultController(ResultRepository resultRepository) {
         this.resultRepository = resultRepository;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/results/user/{user_id}")
-    public ResponseEntity getResults(Result result, @PathVariable("user_id") Integer user_id) {
+    public ResponseEntity<Void> getResults(Result result, @PathVariable("user_id") Integer user_id) {
 
         if (resultRepository.doesUserHasResult(user_id)) {
-            conflictStatus = true;
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 
         resultList = resultRepository.getAllResults(user_id);
 
-        return new ResponseEntity<>(resultList, HttpStatus.OK);
+        return new ResponseEntity(resultList, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/results/scores/{user_id}")
     public ResponseEntity orderResultsScore(Result result, @PathVariable("user_id") Integer user_id) {
 
-        if (!conflictStatus){
-            scoreList = resultRepository.getOrderedScores(user_id);
+        if (resultRepository.doesUserHasResult(user_id)) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+        scoreList = resultRepository.getOrderedScores(user_id);
 
         return new ResponseEntity<>(scoreList, HttpStatus.OK);
     }
