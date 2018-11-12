@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -41,20 +42,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.cors().and().csrf().disable()
+        http.cors().disable().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/*/users").permitAll()
+                .antMatchers(HttpMethod.POST, "/*/users/").permitAll()
+                .antMatchers( "/login").permitAll()
                 //.anyRequest().authenticated()
-//                .antMatchers("/*/enterStudent").hasRole("Student")
-//                .antMatchers("/*/enterTeacher").hasRole("Teacher")
+                //.antMatchers("/*/enterStudent").hasRole("Student")
+                //.antMatchers("/*/enterTeacher").hasRole("Teacher")
                 .and()
                 .addFilter(new TokenAuthenticationFilter(authenticationManager()))
-                .addFilter(new TokenAuthorizationFilter(authenticationManager(), customUserDetailsService));
+                .addFilter(new TokenAuthorizationFilter(authenticationManager(), customUserDetailsService))
+                .exceptionHandling()
+                .authenticationEntryPoint(getBasicAuthEntryPoint());
 //              .httpBasic()
 //              .realmName(REALM)
 //              .authenticationEntryPoint(getBasicAuthEntryPoint());
 
     }
+
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
+//        configuration.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
+//        configuration.setAllowCredentials(true);
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
 
 //    @Autowired
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
