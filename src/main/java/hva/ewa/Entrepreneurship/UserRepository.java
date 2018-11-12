@@ -1,5 +1,4 @@
-package hva.ewa.Entrepreneurship.repository;
-import hva.ewa.Entrepreneurship.model.Result;
+package hva.ewa.Entrepreneurship;
 import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -32,4 +31,5 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Modifying
     @Query("UPDATE User u SET u.firstname = ?1, u.lastname = ?2, u.email = ?3 WHERE u.id = :id")
     User updateUser(String firstname, String lastname, String email, @PathVariable("userid") Integer id);
+
 }
