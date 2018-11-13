@@ -18,8 +18,8 @@ public class UserController {
 
     private UserRepository userRepository;
 
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     //Can be used to populate list of users for admin
 //    public ResponseEntity<List<User>> retrieveAllUsers() {
@@ -32,7 +32,7 @@ public class UserController {
         if (userRepository.doesUserExist(user.getEmail())) {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
-        //user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
