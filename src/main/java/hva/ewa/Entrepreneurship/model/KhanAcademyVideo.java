@@ -30,10 +30,10 @@ public class KhanAcademyVideo {
     private String url;
 
     @NotNull
-    private Integer showOnTop;
+    private Integer show_on_top;
 
     @NotNull
-    private Integer showHide;
+    private Integer show_hide;
 
     public Integer getId() {
         return id;
@@ -91,19 +91,19 @@ public class KhanAcademyVideo {
         this.url = url;
     }
 
-    public Integer getShowOnTop() {
-        return showOnTop;
+    public Integer getShow_on_top() {
+        return show_on_top;
     }
 
-    public void setShowOnTop(Integer showOnTop) {
-        this.showOnTop = showOnTop;
+    public void setShow_on_top(Integer show_on_top) {
+        this.show_on_top = show_on_top;
     }
 
-    public Integer getShowHide() {
-        return showHide;
+    public Integer getShow_hide() {
+        return show_hide;
     }
 
-    public void setShowHide(Integer showHide) {
-        this.showHide = showHide;
+    public void setShow_hide(Integer show_hide) {
+        this.show_hide = show_hide;
     }
 }
