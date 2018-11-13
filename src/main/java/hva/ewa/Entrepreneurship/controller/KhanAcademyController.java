@@ -2,6 +2,7 @@ package hva.ewa.Entrepreneurship.controller;
 
 import hva.ewa.Entrepreneurship.model.KhanAcademyVideo;
 import hva.ewa.Entrepreneurship.repository.KhanAcademyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class KhanAcademyController {
 
+    @Autowired
     private KhanAcademyRepository khanAcademyRepository;
 
     public KhanAcademyController(KhanAcademyRepository khanAcademyRepository) {
@@ -36,8 +38,8 @@ public class KhanAcademyController {
 //        return result;
 //    }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/khanacademy/video")
-    public KhanAcademyVideo saveVideos(@RequestBody KhanAcademyVideo khanAcademyVideo){
+    @RequestMapping(method = RequestMethod.POST, value = "/khanacademy/video", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity insertVideos(@RequestBody KhanAcademyVideo khanAcademyVideo){
 
 //        List<KhanAcademyVideo> list = new ArrayList<>();
 //
@@ -50,7 +52,7 @@ public class KhanAcademyController {
 //        if (list.isEmpty()) {
 //            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //        }
-        return khanAcademyVideo;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/khanacademy/videolist")
