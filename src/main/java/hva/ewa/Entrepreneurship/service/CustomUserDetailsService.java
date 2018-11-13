@@ -3,10 +3,17 @@ package hva.ewa.Entrepreneurship.service;
 import hva.ewa.Entrepreneurship.UserRepository;
 import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
@@ -43,8 +50,9 @@ public class CustomUserDetailsService implements UserDetailsService {
      * @return user's credentials which includes their email address (username), password and role
      */
     private UserDetails userDetails(User user) {
+        List<GrantedAuthority> list = new ArrayList<>();
+        list.add(new SimpleGrantedAuthority(user.getRole()));
         //return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password("{noop}" + user.getPassword()).roles(user.getRole()).build();
-        return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword()).roles(user.getRole()).build();
-
+        return org.springframework.security.core.userdetails.User.withUsername(user.getEmail()).password(user.getPassword()).authorities(list).build();
     }
 }
