@@ -1,9 +1,8 @@
 package hva.ewa.Entrepreneurship.service;
 
-import hva.ewa.Entrepreneurship.UserRepository;
 import hva.ewa.Entrepreneurship.model.User;
+import hva.ewa.Entrepreneurship.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Component
