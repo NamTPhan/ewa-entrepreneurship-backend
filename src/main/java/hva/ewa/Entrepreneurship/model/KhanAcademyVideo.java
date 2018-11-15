@@ -42,6 +42,8 @@ public class KhanAcademyVideo {
     @NotNull
     private Integer show_hide;
 
+    private String competences;
+
     public Integer getId() {
         return id;
     }
@@ -112,5 +114,13 @@ public class KhanAcademyVideo {
 
     public void setShow_hide(Integer show_hide) {
         this.show_hide = show_hide;
+    }
+
+    public String getCompetences() {
+        return competences;
+    }
+
+    public void setCompetences(String competences) {
+        this.competences = competences;
     }
 }
