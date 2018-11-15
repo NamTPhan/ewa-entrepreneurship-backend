@@ -23,7 +23,7 @@ public class ResultController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/results/user/{user_id}")
-    public ResponseEntity<Void> getResults(Result result, @PathVariable("user_id") Integer user_id) {
+    public ResponseEntity<Void> getResults(User user, @PathVariable("user_id") Integer user_id) {
 
         if (resultRepository.doesUserHasResult(user_id)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -35,7 +35,7 @@ public class ResultController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/results/scores/{user_id}")
-    public ResponseEntity orderResultsScore(Result result, @PathVariable("user_id") Integer user_id) {
+    public ResponseEntity orderResultsScore(User user, @PathVariable("user_id") Integer user_id) {
 
         if (resultRepository.doesUserHasResult(user_id)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);

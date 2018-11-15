@@ -95,4 +95,11 @@ public class UserController {
 //        return new ResponseEntity<>("You are teacher", HttpStatus.OK);
 //    }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/users/competencetest/{email}")
+    public ResponseEntity findUserIdBasedOnEmail(User user, @PathVariable("email") String email) {
+
+        Integer user_id = userRepository.findByUserEmail(email).getId();
+
+        return new ResponseEntity<>(user_id, HttpStatus.OK);
+    }
 }
