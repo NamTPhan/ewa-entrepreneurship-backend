@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -56,5 +57,15 @@ public class KhanAcademyController {
 
         khanAcademyRepository.save(video);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/khanacademy/videolist/{user_id}")
+    public ResponseEntity personalListUser(KhanAcademyVideo khanAcademyVideo, @PathVariable("user_id") Integer user_id) {
+
+        List<String> threeCompetences = khanAcademyRepository.getThreeLowestCompetences(user_id);
+
+        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.videoMatchLowestCompetences(threeCompetences.get(0),threeCompetences.get(1),threeCompetences.get(2));
+
+        return new ResponseEntity<>(khanAcademyVideoList, HttpStatus.OK);
     }
 }
