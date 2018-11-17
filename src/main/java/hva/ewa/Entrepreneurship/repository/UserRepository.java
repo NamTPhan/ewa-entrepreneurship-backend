@@ -5,13 +5,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
-
 public interface UserRepository extends CrudRepository<User, Integer> {
 
     @Query("SELECT email, password, role FROM User")
@@ -26,8 +26,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query("SELECT u FROM User u WHERE u.email = ?1")
     User findByUserEmail(String userEmail);
 
-    @Query("SELECT u FROM User u WHERE u.id = :id")
-    User findUserById(@PathVariable("userid") Integer id);
+    @Query("SELECT u FROM User u WHERE u.id = :userid")
+    User findUserById(@Param("userid") Integer id);
 
     @Modifying
     @Query("UPDATE User u SET u.firstname = ?1, u.lastname = ?2, u.email = ?3 WHERE u.id = :id")
