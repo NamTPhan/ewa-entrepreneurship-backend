@@ -5,7 +5,6 @@ import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,20 +37,20 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/users/update/{userid}")
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("userid") Integer id) {
-
-        User currentUser = userRepository.findUserById(id);
-
-        if (currentUser == null) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-        }
-        currentUser.setFirstname(user.getFirstname());
-        currentUser.setLastname(user.getLastname());
-        currentUser.setEmail(user.getEmail());
-        userRepository.updateUser(user.getFirstname(), user.getLastname(), user.getEmail(), id);
-        return new ResponseEntity<User>(HttpStatus.OK);
-    }
+//    @RequestMapping(method = RequestMethod.PUT, value = "/users/update/{userid}")
+//    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("userid") Integer id) {
+//
+//        User currentUser = userRepository.findUserById(id);
+//
+//        if (currentUser == null) {
+//            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+//        }
+//        currentUser.setFirstname(user.getFirstname());
+//        currentUser.setLastname(user.getLastname());
+//        currentUser.setEmail(user.getEmail());
+//        userRepository.updateUser(user.getFirstname(), user.getLastname(), user.getEmail(), id);
+//        return new ResponseEntity<User>(HttpStatus.OK);
+//    }
 
 //    @RequestMapping(method = RequestMethod.POST, value = "/login")
 //    public ResponseEntity<User> login(@RequestBody User user) {
@@ -68,11 +67,16 @@ public class UserController {
 //
 //    }
 
-    //Can be removed
-    @RequestMapping(method = RequestMethod.GET, value = "/users")
-    public List<User> existingUser(User user) {
+    @RequestMapping(method = RequestMethod.GET, value = "/users/user/{userid}")
+    public ResponseEntity<?> getUser(@PathVariable("userid") Integer id) {
+        User user = userRepository.findUserById(id);
 
-        return userRepository.findAllUsers(user.getEmail(), user.getPassword(), user.getRole());
+        if (user == null) {
+            System.out.println("User with ID " + id + " not found");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     //Can be removed
