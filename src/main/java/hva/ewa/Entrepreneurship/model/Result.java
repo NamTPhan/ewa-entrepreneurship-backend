@@ -35,6 +35,10 @@ public class Result implements Serializable {
     @NotNull
     private Double score;
 
+    @Id
+    @NotNull
+    private String date_finished;
+
 //    public User getUser_id() {
 //        return user_id;
 //    }
@@ -74,5 +78,13 @@ public class Result implements Serializable {
 
     public void setScore(Double score) {
         this.score = score;
+    }
+
+    public String getDate_finished() {
+        return date_finished;
+    }
+
+    public void setDate_finished(String date_finished) {
+        this.date_finished = date_finished;
     }
 }
