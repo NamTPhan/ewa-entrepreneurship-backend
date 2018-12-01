@@ -41,7 +41,7 @@ public class KhanAcademyController {
 
         List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.getAllVideos(khanAcademyVideo.getId(), khanAcademyVideo.getInternal_id(), khanAcademyVideo.getTitle(),
                 khanAcademyVideo.getDescription(), khanAcademyVideo.getIcon(), khanAcademyVideo.getIcon_large(),
-                khanAcademyVideo.getUrl(), khanAcademyVideo.getShow_on_top(), khanAcademyVideo.getShow_hide(), khanAcademyVideo.getCompetences());
+                khanAcademyVideo.getUrl(), khanAcademyVideo.getShow_on_top(), khanAcademyVideo.getShow_hide(), khanAcademyVideo.getCompetences(), khanAcademyVideo.getDeleted());
 
         return new ResponseEntity<>(khanAcademyVideoList, HttpStatus.OK);
     }
@@ -54,6 +54,17 @@ public class KhanAcademyController {
         video.setShow_on_top(khanAcademyVideo.getShow_on_top());
         video.setShow_hide(khanAcademyVideo.getShow_hide());
         video.setCompetences(khanAcademyVideo.getCompetences());
+
+        khanAcademyRepository.save(video);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/khanacademy/delete/{video_id}")
+    public ResponseEntity<KhanAcademyVideo> deleteVideoKhan(@RequestBody KhanAcademyVideo khanAcademyVideo, @PathVariable("video_id") Integer video_id) {
+
+        KhanAcademyVideo video = khanAcademyRepository.findVideoById(video_id);
+
+        video.setDeleted(khanAcademyVideo.getDeleted());
 
         khanAcademyRepository.save(video);
         return new ResponseEntity<>(HttpStatus.OK);
