@@ -32,4 +32,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Modifying
     @Query("UPDATE User u SET u.firstname = ?1, u.lastname = ?2, u.email = ?3 WHERE u.id = :id")
     User updateUser(String firstname, String lastname, String email, @PathVariable("userid") Integer id);
+
+    @Query("SELECT id, email, firstname, lastname, role, teacher FROM User")
+    List<User> listAllUsers(Integer id, String email, String firstname, String lastname, String role, String teacher);
 }

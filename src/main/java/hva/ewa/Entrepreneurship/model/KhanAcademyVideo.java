@@ -44,6 +44,9 @@ public class KhanAcademyVideo {
 
     private String competences;
 
+    @NotNull
+    private Integer deleted;
+
     public Integer getId() {
         return id;
     }
@@ -122,5 +125,13 @@ public class KhanAcademyVideo {
 
     public void setCompetences(String competences) {
         this.competences = competences;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
     }
 }
