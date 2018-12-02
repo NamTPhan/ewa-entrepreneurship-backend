@@ -51,4 +51,20 @@ public class ResultController {
         resultRepository.save(result);
         return result;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/results/dates/{user_id}")
+    public ResponseEntity<Void> getResultsDates(User user, @PathVariable("user_id") Integer user_id) {
+
+        List<String> dateList = resultRepository.getAllResultsDates(user_id);
+
+        return new ResponseEntity(dateList, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/results/user/{user_id}/{date_finished}")
+    public ResponseEntity<Void> getSelectedTestResults(User user, @PathVariable("user_id") Integer user_id, @PathVariable("date_finished") String date_finished) {
+
+        resultList = resultRepository.getAllSelectedTestResults(user_id, date_finished);
+
+        return new ResponseEntity(resultList, HttpStatus.OK);
+    }
 }
