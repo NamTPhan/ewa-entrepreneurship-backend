@@ -19,4 +19,10 @@ public interface ResultRepository extends CrudRepository<Result, Integer> {
     @Query("SELECT r1.user_id, r1.competence_id, r1.score, r1.date_finished FROM Result r1 WHERE date_finished = (SELECT MAX(date_finished) \n" +
             "FROM Result r2 WHERE user_id = :user_id) AND competence_id > 3 ORDER BY score DESC")
     List<Result> getOrderedScores(@Param("user_id") Integer id);
+
+    @Query("SELECT DISTINCT date_finished FROM Result WHERE user_id = :user_id ORDER BY date_finished DESC")
+    List<String> getAllResultsDates(@Param("user_id") Integer id);
+
+    @Query("SELECT user_id, competence_id, score, date_finished FROM Result WHERE user_id = ?1 AND date_finished = ?2")
+    List<Result> getAllSelectedTestResults(@Param("user_id") Integer id, @Param("date_finished") String date_finished);
 }
