@@ -23,6 +23,11 @@ public interface KhanAcademyRepository extends CrudRepository<KhanAcademyVideo, 
 
     @Query("SELECT u FROM KhanAcademyVideo u WHERE (competences = ?1 OR competences = ?2 OR competences = ?3) AND show_hide = 1")
     List<KhanAcademyVideo> videoMatchLowestCompetences(String competence1, String competence2, String competence3);
+
+    @Query("SELECT u FROM KhanAcademyVideo u WHERE u.title LIKE %:keywordOne% OR " +
+            "u.description LIKE %:keywordOne% OR u.url LIKE %:keywordOne% OR u.competences LIKE %:keywordOne% " +
+            "AND show_hide = 1")
+    List<KhanAcademyVideo> videoMatchKeywords(@Param("keywordOne") String keywordOne);
 }
 
 

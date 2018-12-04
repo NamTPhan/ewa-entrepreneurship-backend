@@ -75,7 +75,15 @@ public class KhanAcademyController {
 
         List<String> threeCompetences = khanAcademyRepository.getThreeLowestCompetences(user_id);
 
-        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.videoMatchLowestCompetences(threeCompetences.get(0),threeCompetences.get(1),threeCompetences.get(2));
+        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.videoMatchLowestCompetences(threeCompetences.get(0), threeCompetences.get(1), threeCompetences.get(2));
+
+        return new ResponseEntity<>(khanAcademyVideoList, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/khanacademy/keywords/{keywordOne}")
+    public ResponseEntity getVideosBasedOnKeywords(KhanAcademyVideo khanAcademyVideo, @PathVariable("keywordOne") String keywordOne) {
+
+        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.videoMatchKeywords(keywordOne);
 
         return new ResponseEntity<>(khanAcademyVideoList, HttpStatus.OK);
     }
