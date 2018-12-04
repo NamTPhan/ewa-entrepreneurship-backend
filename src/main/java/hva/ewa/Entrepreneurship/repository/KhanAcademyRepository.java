@@ -17,7 +17,8 @@ public interface KhanAcademyRepository extends CrudRepository<KhanAcademyVideo, 
     KhanAcademyVideo findVideoById(@Param("video_id") Integer video_id);
 
     @Query(nativeQuery = true, value = "SELECT c.competence FROM Result r INNER JOIN Competence c ON r.competence_id = c.competence_id " +
-            "WHERE r.user_id = :user_id ORDER BY r.score ASC LIMIT 3")
+            "WHERE date_finished =(SELECT MAX(date_finished)FROM result r2 WHERE user_id = :user_id " +
+            "AND competence_id > 3 ORDER BY score DESC) ORDER BY r.score ASC LIMIT 3")
     List<String> getThreeLowestCompetences(@Param("user_id") Integer user_id);
 
     @Query("SELECT u FROM KhanAcademyVideo u WHERE (competences = ?1 OR competences = ?2 OR competences = ?3) AND show_hide = 1")
