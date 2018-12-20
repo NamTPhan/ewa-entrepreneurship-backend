@@ -10,7 +10,7 @@ public class AdditionalVideos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Does auto increment checked
-    private Integer id;
+    private Integer id_video;
 
     @NotNull
     @Size(max = 255)
@@ -24,8 +24,12 @@ public class AdditionalVideos {
     @Size(max = 255)
     private String url;
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getId_video() {
+        return id_video;
+    }
+
+    public void setId_video(Integer id_video) {
+        this.id_video = id_video;
     }
 
     public void setTitle(String title) {
@@ -40,9 +44,7 @@ public class AdditionalVideos {
         this.url = url;
     }
 
-    public Integer getId() {
-        return id;
-    }
+
 
     public String getTitle() {
         return title;

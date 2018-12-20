@@ -2,6 +2,7 @@ package hva.ewa.Entrepreneurship.controller;
 
 
 import hva.ewa.Entrepreneurship.model.AdditionalVideos;
+import hva.ewa.Entrepreneurship.model.KhanAcademyVideo;
 import hva.ewa.Entrepreneurship.repository.AdditionalVideosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,10 +44,37 @@ public class AdditionalVideosController {
     public ResponseEntity getAllVideos(AdditionalVideos additionalVideos) {
 
         List<AdditionalVideos> listOfAdditionalVideos = additionalVideosRepository.getAllVideos(
-                additionalVideos.getId(), additionalVideos.getTitle(), additionalVideos.getDescription()
+                additionalVideos.getId_video(), additionalVideos.getTitle(), additionalVideos.getDescription()
                 , additionalVideos.getUrl());
 
         return new ResponseEntity<>(listOfAdditionalVideos, HttpStatus.OK);
+    }
+
+
+    @PutMapping(value = "/additionalvideo/video/update/{id_video}")
+    public ResponseEntity<AdditionalVideos> updateAdditionalVideos(@RequestBody AdditionalVideos additionalVideos, @PathVariable("id_video") Integer id_video) {
+
+        AdditionalVideos video = additionalVideosRepository.getVideoFromId(id_video);
+
+        video.setTitle(additionalVideos.getTitle());
+        video.setDescription(additionalVideos.getDescription());
+        video.setUrl(additionalVideos.getUrl());
+
+        additionalVideosRepository.save(video);
+        System.out.println(video);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/additionalvideo/delete/{id_video}")
+    public ResponseEntity<AdditionalVideos> deleteAdditionalVideos(@RequestBody AdditionalVideos additionalVideos, @PathVariable("id_video") Integer video_id) {
+
+        AdditionalVideos video = additionalVideosRepository.getVideoFromId(video_id);
+
+
+
+        additionalVideosRepository.delete(video);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
 
