@@ -13,15 +13,16 @@ public class OpenLearningVideo {
     @Column(name="openlearningvideo_id")
     private Integer id;
 
-    private String title;
-    private String url;
-
     @Size(max=100000)
+    private String internal_id;
+    private String title;
     private String description;
-    private String image;
-    private String competences;
+    private String icon;
+    private String icon_large;
+    private String url;
     private Integer show_on_top;
     private Integer show_hide;
+    private String competences;
     private Integer deleted;
 
     public Integer getId() {
@@ -32,20 +33,20 @@ public class OpenLearningVideo {
         this.id = id;
     }
 
+    public String getInternal_id() {
+        return internal_id;
+    }
+
+    public void setInternal_id(String internal_id) {
+        this.internal_id = internal_id;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getDescription() {
@@ -56,20 +57,28 @@ public class OpenLearningVideo {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    public String getCompetences() {
-        return competences;
+    public String getIcon_large() {
+        return icon_large;
     }
 
-    public void setCompetences(String competences) {
-        this.competences = competences;
+    public void setIcon_large(String icon_large) {
+        this.icon_large = icon_large;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Integer getShow_on_top() {
@@ -86,6 +95,14 @@ public class OpenLearningVideo {
 
     public void setShow_hide(Integer show_hide) {
         this.show_hide = show_hide;
+    }
+
+    public String getCompetences() {
+        return competences;
+    }
+
+    public void setCompetences(String competences) {
+        this.competences = competences;
     }
 
     public Integer getDeleted() {
