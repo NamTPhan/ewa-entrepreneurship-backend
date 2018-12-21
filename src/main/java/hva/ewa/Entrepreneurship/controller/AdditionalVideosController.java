@@ -45,7 +45,7 @@ public class AdditionalVideosController {
 
         List<AdditionalVideos> listOfAdditionalVideos = additionalVideosRepository.getAllVideos(
                 additionalVideos.getId_video(), additionalVideos.getTitle(), additionalVideos.getDescription()
-                , additionalVideos.getUrl());
+                , additionalVideos.getUrl(),additionalVideos.getCompetence());
 
         return new ResponseEntity<>(listOfAdditionalVideos, HttpStatus.OK);
     }
@@ -59,6 +59,7 @@ public class AdditionalVideosController {
         video.setTitle(additionalVideos.getTitle());
         video.setDescription(additionalVideos.getDescription());
         video.setUrl(additionalVideos.getUrl());
+        video.setCompetence(additionalVideos.getCompetence());
 
         additionalVideosRepository.save(video);
         System.out.println(video);

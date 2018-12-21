@@ -24,6 +24,12 @@ public class AdditionalVideos {
     @Size(max = 255)
     private String url;
 
+
+
+    @NotNull
+    @Size(max = 255)
+    private String competence;
+
     public Integer getId_video() {
         return id_video;
     }
@@ -56,5 +62,13 @@ public class AdditionalVideos {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getCompetence() {
+        return competence;
+    }
+
+    public void setCompetence(String competence) {
+        this.competence = competence;
     }
 }
