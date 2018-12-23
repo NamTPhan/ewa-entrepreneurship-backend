@@ -22,7 +22,7 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     //Can be used to populate list of users for admin
-    @RequestMapping(method = RequestMethod.GET, value = "/users/list")
+    @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ResponseEntity retrieveAllUsers(User user) {
 
         List<User> listOfUsers = userRepository.listAllUsers(user.getId(), user.getEmail(), user.getFirstname(), user.getLastname(), user.getRole(), user.getTeacher());
