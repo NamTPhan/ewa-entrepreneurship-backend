@@ -60,7 +60,7 @@ public class UserController {
         return userRepository.findAllEmail(user.getEmail());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/users/competencetest/{email}")
+    @RequestMapping(method = RequestMethod.GET, value = "/users/user/id/{email}")
     public ResponseEntity findUserIdBasedOnEmail(User user, @PathVariable("email") String email) {
 
         Integer user_id = userRepository.findByUserEmail(email).getId();
