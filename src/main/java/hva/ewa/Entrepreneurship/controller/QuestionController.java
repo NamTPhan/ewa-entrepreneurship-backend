@@ -18,6 +18,7 @@ public class QuestionController {
     @Autowired
     private QuestionRepository questionRepository;
 
+    //get a list of all questions
     @RequestMapping(method = RequestMethod.GET, value = "/questions")
     public List<Question> getAllQuestions(Question question) {
 

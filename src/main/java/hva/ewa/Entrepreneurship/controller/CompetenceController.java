@@ -18,6 +18,7 @@ public class CompetenceController {
     @Autowired
     private CompetenceRepository competenceRepository;
 
+    //get a list of all competences
     @RequestMapping(method = RequestMethod.GET, value = "/competences")
     public List<Competence> getAllCompetences(Competence competence) {
 
@@ -26,6 +27,7 @@ public class CompetenceController {
         return competenceList;
     }
 
+    //get sub competences of all competences
     @RequestMapping(method = RequestMethod.GET, value = "/competences/sub-competences")
     public List<Competence> getAllSubCompetences(Competence competence) {
 
@@ -34,6 +36,7 @@ public class CompetenceController {
         return subCompetenceList;
     }
 
+    //get main competences of all competences
     @RequestMapping(method = RequestMethod.GET, value = "/competences/main-competences")
     public List<Competence> getAllMainCompetences(Competence competence) {
 
