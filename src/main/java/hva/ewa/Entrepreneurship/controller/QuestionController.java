@@ -3,6 +3,8 @@ package hva.ewa.Entrepreneurship.controller;
 import hva.ewa.Entrepreneurship.repository.QuestionRepository;
 import hva.ewa.Entrepreneurship.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,12 +22,12 @@ public class QuestionController {
 
     //get a list of all questions
     @RequestMapping(method = RequestMethod.GET, value = "/questions")
-    public List<Question> getAllQuestions(Question question) {
+    public ResponseEntity getAllQuestions(Question question) {
 
-        List<Question> questionList = questionRepository.findAllQuestions(question.getQuestion_id(), question.getDescriptiontext(), question.getCompetence_id());
+        List<Question> questionList = questionRepository.findAllQuestions(question.getQuestion_id(), question.getDescription_text(), question.getCompetence_id());
 
         System.out.println(questionList.size()); // For testing
 
-        return questionList;
+        return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 }
