@@ -18,17 +18,17 @@ public class ResultController {
     private ResultRepository resultRepository;
     private List<Result> resultList, scoreList;
 
-    //constuctor
+    // Constuctor
     public ResultController(ResultRepository resultRepository) {
         this.resultRepository = resultRepository;
     }
 
-    //get results of user by id
+    // Get results of user by id
     @RequestMapping(method = RequestMethod.GET, value = "/results/user/{user_id}")
-    public ResponseEntity<Void> getResults(User user, @PathVariable("user_id") Integer user_id) {
+    public ResponseEntity<Void> getResults(@PathVariable("user_id") Integer user_id) {
 
         if (resultRepository.doesUserHasResult(user_id)) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         resultList = resultRepository.getAllResults(user_id);
@@ -36,19 +36,19 @@ public class ResultController {
         return new ResponseEntity(resultList, HttpStatus.OK);
     }
 
-    //get results' scores of user by id
+    // Get results scores of user by id
     @RequestMapping(method = RequestMethod.GET, value = "/results/scores/user/{user_id}")
-    public ResponseEntity orderResultsScore(User user, @PathVariable("user_id") Integer user_id) {
+    public ResponseEntity orderResultsScore(@PathVariable("user_id") Integer user_id) {
 
         if (resultRepository.doesUserHasResult(user_id)) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         scoreList = resultRepository.getOrderedScores(user_id);
 
         return new ResponseEntity<>(scoreList, HttpStatus.OK);
     }
 
-    //save results of competence test
+    // Save results of competence test
     @RequestMapping(method = RequestMethod.POST, value = "/results")
     public ResponseEntity<Void> insertScore(@RequestBody Result result) {
 
@@ -56,18 +56,18 @@ public class ResultController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    //get dates of competence test made by user's id
+    // Get dates of competence test made by user's id
     @RequestMapping(method = RequestMethod.GET, value = "/results/dates/user/{user_id}")
-    public ResponseEntity<Void> getResultsDates(User user, @PathVariable("user_id") Integer user_id) {
+    public ResponseEntity<Void> getResultsDates(@PathVariable("user_id") Integer user_id) {
 
         List<String> dateList = resultRepository.getAllResultsDates(user_id);
 
         return new ResponseEntity(dateList, HttpStatus.OK);
     }
 
-    //get selected results of user by id and date
+    // Get selected results of user by id and date
     @RequestMapping(method = RequestMethod.GET, value = "/results/dates/date/{date_finished}/user/{user_id}")
-    public ResponseEntity<Void> getSelectedTestResults(User user, @PathVariable("user_id") Integer user_id, @PathVariable("date_finished") String date_finished) {
+    public ResponseEntity<Void> getSelectedTestResults(@PathVariable("user_id") Integer user_id, @PathVariable("date_finished") String date_finished) {
 
         resultList = resultRepository.getAllSelectedTestResults(user_id, date_finished);
 

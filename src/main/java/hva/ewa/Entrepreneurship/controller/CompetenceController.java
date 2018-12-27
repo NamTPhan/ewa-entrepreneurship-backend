@@ -20,7 +20,7 @@ public class CompetenceController {
     @Autowired
     private CompetenceRepository competenceRepository;
 
-    //get a list of all competences
+    // Get a list of all competences
     @RequestMapping(method = RequestMethod.GET, value = "/competences")
     public ResponseEntity getAllCompetences(Competence competence) {
 
@@ -29,7 +29,7 @@ public class CompetenceController {
         return new ResponseEntity<>(competenceList, HttpStatus.OK);
     }
 
-    //get sub competences of all competences
+    // Get sub competences of all competences
     @RequestMapping(method = RequestMethod.GET, value = "/competences/sub-competences")
     public ResponseEntity getAllSubCompetences(Competence competence) {
 
@@ -38,7 +38,7 @@ public class CompetenceController {
         return new ResponseEntity<>(subCompetenceList, HttpStatus.OK);
     }
 
-    //get main competences of all competences
+    // Get main competences of all competences
     @RequestMapping(method = RequestMethod.GET, value = "/competences/main-competences")
     public ResponseEntity getAllMainCompetences(Competence competence) {
 

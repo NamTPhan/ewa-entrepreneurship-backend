@@ -6,12 +6,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 @Table(name = "question")
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Does auto increment checked
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer question_id;
 
     @NotNull

@@ -4,11 +4,9 @@ import hva.ewa.Entrepreneurship.model.KhanAcademyVideo;
 import hva.ewa.Entrepreneurship.repository.KhanAcademyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,7 +29,7 @@ public class KhanAcademyController {
         }
 
         if (khanAcademyVideo.length == 0) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(khanAcademyVideo, HttpStatus.OK);
     }
@@ -71,11 +69,11 @@ public class KhanAcademyController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/khanacademy/videolist/{user_id}")
-    public ResponseEntity personalListUser(KhanAcademyVideo khanAcademyVideo, @PathVariable("user_id") Integer user_id) {
+    public ResponseEntity personalListUser(@PathVariable("user_id") Integer user_id) {
 
         List<String> threeCompetences = khanAcademyRepository.getThreeLowestCompetences(user_id);
 
-        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.videoMatchLowestCompetences(threeCompetences.get(0),threeCompetences.get(1),threeCompetences.get(2));
+        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.videoMatchLowestCompetences(threeCompetences.get(0), threeCompetences.get(1), threeCompetences.get(2));
 
         return new ResponseEntity<>(khanAcademyVideoList, HttpStatus.OK);
     }

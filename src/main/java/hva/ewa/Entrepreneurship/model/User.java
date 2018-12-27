@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 @Table(name="user")
 public class User implements Serializable {
     @Id

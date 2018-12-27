@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    //Can be used to populate list of users for admin
+    // Can be used to populate list of users for admin
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ResponseEntity retrieveAllUsers(User user) {
 
@@ -34,7 +34,7 @@ public class UserController {
     public ResponseEntity<Void> createUser(@RequestBody User user) {
 
         if (userRepository.doesUserExist(user.getEmail())) {
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
@@ -61,7 +61,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/users/user/id/{email}")
-    public ResponseEntity findUserIdBasedOnEmail(User user, @PathVariable("email") String email) {
+    public ResponseEntity findUserIdBasedOnEmail(@PathVariable("email") String email) {
 
         Integer user_id = userRepository.findByUserEmail(email).getId();
 

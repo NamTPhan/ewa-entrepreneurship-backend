@@ -20,13 +20,11 @@ public class QuestionController {
     @Autowired
     private QuestionRepository questionRepository;
 
-    //get a list of all questions
+    // Get a list of all questions
     @RequestMapping(method = RequestMethod.GET, value = "/questions")
     public ResponseEntity getAllQuestions(Question question) {
 
         List<Question> questionList = questionRepository.findAllQuestions(question.getQuestion_id(), question.getDescription_text(), question.getCompetence_id());
-
-        System.out.println(questionList.size()); // For testing
 
         return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
