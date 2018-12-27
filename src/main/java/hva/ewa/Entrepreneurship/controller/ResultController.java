@@ -50,10 +50,10 @@ public class ResultController {
 
     //save results of competence test
     @RequestMapping(method = RequestMethod.POST, value = "/results")
-    public Result insertScore(@RequestBody Result result) {
+    public ResponseEntity<Void> insertScore(@RequestBody Result result) {
 
         resultRepository.save(result);
-        return result;
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //get dates of competence test made by user's id

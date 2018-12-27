@@ -25,7 +25,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ResponseEntity retrieveAllUsers(User user) {
 
-        List<User> listOfUsers = userRepository.listAllUsers(user.getId(), user.getEmail(), user.getFirstname(), user.getLastname(), user.getRole(), user.getTeacher());
+        List<User> listOfUsers = userRepository.listAllUsers(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getRole(), user.getTeacher());
 
         return new ResponseEntity<>(listOfUsers, HttpStatus.OK);
     }
