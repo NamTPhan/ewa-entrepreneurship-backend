@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 @Table(name = "result")
 @IdClass(ResultId.class)
 public class Result implements Serializable {

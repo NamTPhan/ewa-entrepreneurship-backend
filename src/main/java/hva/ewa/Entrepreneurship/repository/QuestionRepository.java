@@ -9,6 +9,6 @@ import java.util.List;
 // CRUD refers Create, Read, Update, Delete
 public interface QuestionRepository extends CrudRepository<Question, Integer>{
 
-    @Query("SELECT question_id, descriptiontext, competence_id FROM Question")
-    List<Question> findAllQuestions(Integer question_id, String descriptiontext, Integer competence_id);
+    @Query("SELECT question_id, description_text, competence_id FROM Question")
+    List<Question> findAllQuestions(Integer question_id, String description_text, Integer competence_id);
 }

@@ -24,15 +24,15 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     List<User> findAllEmail(String email);
 
     @Query("SELECT u FROM User u WHERE u.email = ?1")
-    User findByUserEmail(String userEmail);
+    User findByUserEmail(String email);
 
     @Query("SELECT u FROM User u WHERE u.id = :userid")
     User findUserById(@Param("userid") Integer id);
 
     @Modifying
-    @Query("UPDATE User u SET u.firstname = ?1, u.lastname = ?2, u.email = ?3 WHERE u.id = :id")
-    User updateUser(String firstname, String lastname, String email, @PathVariable("userid") Integer id);
+    @Query("UPDATE User u SET u.first_name = ?1, u.last_name = ?2, u.email = ?3 WHERE u.id = :id")
+    User updateUser(String first_name, String last_name, String email, @PathVariable("userid") Integer id);
 
-    @Query("SELECT id, email, firstname, lastname, role, teacher FROM User")
-    List<User> listAllUsers(Integer id, String email, String firstname, String lastname, String role, String teacher);
+    @Query("SELECT id, email, first_name, last_name, role, teacher FROM User")
+    List<User> listAllUsers(Integer id, String email, String first_name, String last_name, String role, String teacher);
 }

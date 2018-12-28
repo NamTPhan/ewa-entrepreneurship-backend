@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 @Table(name="user")
 public class User implements Serializable {
     @Id
@@ -16,10 +16,10 @@ public class User implements Serializable {
     private Integer id;
 
     @NotNull
-    private String firstname;
+    private String first_name;
 
     @NotNull
-    private String lastname;
+    private String last_name;
 
     @NotNull
     private String email;
@@ -46,20 +46,20 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getEmail() {

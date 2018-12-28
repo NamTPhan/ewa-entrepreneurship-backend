@@ -21,7 +21,7 @@ public class OpenLearningController {
     public ResponseEntity<?> saveOpenLearningVideo(@RequestBody OpenLearningVideo[] openLearningVideo) {
 
         if (openLearningVideo == null) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         for (OpenLearningVideo video : openLearningVideo) {
@@ -36,14 +36,14 @@ public class OpenLearningController {
         OpenLearningVideo openLearningVideo = openLearningVideoRepository.findVideoById(id);
 
         if (openLearningVideo == null) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/openlearning/videos/list")
-    public ResponseEntity retrieveAllOpenLearningVideos(OpenLearningVideo openLearningVideo) {
+    public ResponseEntity retrieveAllOpenLearningVideos() {
 
         List<OpenLearningVideo> videoList = openLearningVideoRepository.listAllVideos();
 
