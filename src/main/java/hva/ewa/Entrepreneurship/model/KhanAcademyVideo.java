@@ -14,7 +14,7 @@ public class KhanAcademyVideo {
 
     @NotNull
     @Size(max = 100)
-    private String internal_id;
+    private String unique_id;
 
     @NotNull
     @Size(max = 300)
@@ -26,11 +26,7 @@ public class KhanAcademyVideo {
 
     @NotNull
     @Size(max = 300)
-    private String icon;
-
-    @NotNull
-    @Size(max = 300)
-    private String icon_large;
+    private String image;
 
     @NotNull
     @Size(max = 300)
@@ -55,12 +51,12 @@ public class KhanAcademyVideo {
         this.id = id;
     }
 
-    public String getInternal_id() {
-        return internal_id;
+    public String getUnique_id() {
+        return unique_id;
     }
 
-    public void setInternal_id(String internal_id) {
-        this.internal_id = internal_id;
+    public void setUnique_id(String unique_id) {
+        this.unique_id = unique_id;
     }
 
     public String getTitle() {
@@ -79,20 +75,12 @@ public class KhanAcademyVideo {
         this.description = description;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getImage() {
+        return image;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getIcon_large() {
-        return icon_large;
-    }
-
-    public void setIcon_large(String icon_large) {
-        this.icon_large = icon_large;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getUrl() {

@@ -37,9 +37,17 @@ public class KhanAcademyController {
     @RequestMapping(method = RequestMethod.GET, value = "/khanacademy/videolist")
     public ResponseEntity videoList(KhanAcademyVideo khanAcademyVideo) {
 
-        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.getAllVideos(khanAcademyVideo.getId(), khanAcademyVideo.getInternal_id(), khanAcademyVideo.getTitle(),
-                khanAcademyVideo.getDescription(), khanAcademyVideo.getIcon(), khanAcademyVideo.getIcon_large(),
-                khanAcademyVideo.getUrl(), khanAcademyVideo.getShow_on_top(), khanAcademyVideo.getShow_hide(), khanAcademyVideo.getCompetences(), khanAcademyVideo.getDeleted());
+        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.getAllVideos(
+                khanAcademyVideo.getId(),
+                khanAcademyVideo.getUnique_id(),
+                khanAcademyVideo.getTitle(),
+                khanAcademyVideo.getDescription(),
+                khanAcademyVideo.getImage(),
+                khanAcademyVideo.getUrl(),
+                khanAcademyVideo.getShow_on_top(),
+                khanAcademyVideo.getShow_hide(),
+                khanAcademyVideo.getCompetences(),
+                khanAcademyVideo.getDeleted());
 
         return new ResponseEntity<>(khanAcademyVideoList, HttpStatus.OK);
     }
