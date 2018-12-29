@@ -4,12 +4,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 @Table(name = "additional_videos")
 public class AdditionalVideos {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Does auto increment checked
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_video;
 
     @NotNull
@@ -23,8 +23,6 @@ public class AdditionalVideos {
     @NotNull
     @Size(max = 255)
     private String url;
-
-
 
     @NotNull
     @Size(max = 255)
@@ -49,8 +47,6 @@ public class AdditionalVideos {
     public void setUrl(String url) {
         this.url = url;
     }
-
-
 
     public String getTitle() {
         return title;
