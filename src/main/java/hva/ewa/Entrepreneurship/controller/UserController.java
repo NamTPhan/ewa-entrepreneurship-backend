@@ -67,6 +67,15 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping(value = "/users/user/{userid}")
+    public ResponseEntity<User> deleteUser(@PathVariable("userid") Integer userid) {
+
+        User user = userRepository.findUserById(userid);
+
+        userRepository.delete(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     //Can be removed
     @RequestMapping(method = RequestMethod.GET, value = "/users/emails")
     public List<User> existingEmail(User user) {
