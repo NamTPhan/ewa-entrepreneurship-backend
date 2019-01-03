@@ -13,7 +13,21 @@ import java.util.List;
 // CRUD refers Create, Read, Update, Delete
 public interface QuestionRepository extends CrudRepository<Question, Integer>{
 
-    @Query(nativeQuery = true, value = "SELECT question_id, description_text, competence_id FROM Question LIMIT 20")
+    @Query(nativeQuery = true, value = "(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 4 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 5 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 6 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 7 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 8 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 9 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 10 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 11 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 12 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 13 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 14 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 15 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 16 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 17 LIMIT 4)" +
+            "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 18 LIMIT 4)")
     List<Question> findMaxTestQuestions(Integer question_id, String description_text, Integer competence_id);
 
     @Query("SELECT question_id, description_text, competence_id FROM Question")

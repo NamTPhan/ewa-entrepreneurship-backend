@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @RestController
 @CrossOrigin("*")
@@ -25,7 +22,8 @@ public class QuestionController {
     @RequestMapping(method = RequestMethod.GET, value = "/questions/shuffled-questions")
     public ResponseEntity getAllShuffledQuestions(Question question) {
 
-        List<Question> questionList = questionRepository.findAllQuestions(question.getQuestion_id(), question.getDescription_text(), question.getCompetence_id());
+        //get a list of questions with a maximum of 4 questions linked to the same competence
+        List<Question> questionList = questionRepository.findMaxTestQuestions(question.getQuestion_id(), question.getDescription_text(), question.getCompetence_id());
 
         //shuffle list of questions
         Collections.shuffle(questionList);
