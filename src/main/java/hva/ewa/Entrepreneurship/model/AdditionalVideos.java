@@ -28,6 +28,8 @@ public class AdditionalVideos {
     @Size(max = 255)
     private String competence;
 
+    private Integer user_id;
+
     public Integer getId_video() {
         return id_video;
     }
@@ -66,5 +68,13 @@ public class AdditionalVideos {
 
     public void setCompetence(String competence) {
         this.competence = competence;
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 }

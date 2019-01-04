@@ -33,6 +33,8 @@ public class User implements Serializable {
     @NotNull
     private String teacher;
 
+    private String class_name;
+
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 //    @JoinColumn(name = "user_id")
 //    @JsonIgnore
@@ -92,5 +94,13 @@ public class User implements Serializable {
 
     public void setTeacher(String teacher) {
         this.teacher = teacher;
+    }
+
+    public String getClass_name() {
+        return class_name;
+    }
+
+    public void setClass_name(String class_name) {
+        this.class_name = class_name;
     }
 }
