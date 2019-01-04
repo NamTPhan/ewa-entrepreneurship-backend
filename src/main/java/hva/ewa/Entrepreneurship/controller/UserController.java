@@ -53,6 +53,29 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @PutMapping(value = "/users/user/{userid}")
+    public ResponseEntity<User> updateUser(@RequestBody User updateUser, @PathVariable("userid") Integer userid) {
+
+        User user = userRepository.findUserById(userid);
+
+        user.setEmail(updateUser.getEmail());
+        user.setFirst_name(updateUser.getFirst_name());
+        user.setLast_name(updateUser.getLast_name());
+        user.setRole(updateUser.getRole());
+
+        userRepository.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/users/user/{userid}")
+    public ResponseEntity<User> deleteUser(@PathVariable("userid") Integer userid) {
+
+        User user = userRepository.findUserById(userid);
+
+        userRepository.delete(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     //Can be removed
     @RequestMapping(method = RequestMethod.GET, value = "/users/emails")
     public List<User> existingEmail(User user) {
