@@ -21,13 +21,22 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    // Can be used to populate list of users for admin
+    //get list of all users
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ResponseEntity retrieveAllUsers(User user) {
 
-        List<User> listOfUsers = userRepository.listAllUsers(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getRole(), user.getTeacher(), user.getClass_name());
+        List<User> usersList = userRepository.listAllUsers(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getRole(), user.getTeacher(), user.getClass_name());
 
-        return new ResponseEntity<>(listOfUsers, HttpStatus.OK);
+        return new ResponseEntity<>(usersList, HttpStatus.OK);
+    }
+
+    //get list of users that are in the same class
+    @RequestMapping(method = RequestMethod.GET, value = "/users/class/{class_name}")
+    public ResponseEntity retrieveAllUsersOfSameClass(@PathVariable("class_name") String class_name) {
+
+        List<User> usersFromSameClassList = userRepository.listAllUsersBySameClass(class_name);
+
+        return new ResponseEntity(usersFromSameClassList, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
