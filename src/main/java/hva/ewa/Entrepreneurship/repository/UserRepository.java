@@ -38,4 +38,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
     @Query("SELECT u FROM User u WHERE u.class_name = ?1")
     List<User> listAllUsersBySameClass(@PathVariable("class_name") String class_name);
+
+    @Query("SELECT  u.id, u.email, u.first_name, u.last_name, u.role, c.class_id, c.class_name  FROM User u INNER JOIN Class c ON c.user_id = u.id")
+    List<User> listAllTeachersAndClasses();
 }

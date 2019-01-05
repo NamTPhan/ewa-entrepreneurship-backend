@@ -39,6 +39,15 @@ public class UserController {
         return new ResponseEntity(usersFromSameClassList, HttpStatus.OK);
     }
 
+    //get list of teachers and their classes
+    @RequestMapping(method = RequestMethod.GET, value = "/users/list/class/list")
+    public ResponseEntity retrieveAllTeachersAndClasses() {
+
+        List<User> teachersAndClassesList = userRepository.listAllTeachersAndClasses();
+
+        return new ResponseEntity(teachersAndClassesList, HttpStatus.OK);
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/users")
     public ResponseEntity<Void> createUser(@RequestBody User user) {
 
