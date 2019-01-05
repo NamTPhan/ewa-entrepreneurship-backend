@@ -25,7 +25,7 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ResponseEntity retrieveAllUsers(User user) {
 
-        List<User> listOfUsers = userRepository.listAllUsers(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getRole(), user.getTeacher());
+        List<User> listOfUsers = userRepository.listAllUsers(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getRole(), user.getTeacher(), user.getClass_name());
 
         return new ResponseEntity<>(listOfUsers, HttpStatus.OK);
     }
@@ -65,6 +65,21 @@ public class UserController {
 
         userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/user/{userid}/class")
+    public ResponseEntity updateClassOfUser(@RequestBody User updateUser, @PathVariable("userid") Integer userid) {
+
+        User user = userRepository.findUserById(userid);
+
+        if (user == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        user.setClass_name(updateUser.getClass_name());
+        userRepository.save(user);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/users/user/{userid}")
