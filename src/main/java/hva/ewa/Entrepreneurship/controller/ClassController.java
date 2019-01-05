@@ -1,6 +1,7 @@
 package hva.ewa.Entrepreneurship.controller;
 
 import hva.ewa.Entrepreneurship.model.Class;
+import hva.ewa.Entrepreneurship.model.User;
 import hva.ewa.Entrepreneurship.repository.ClassRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ public class ClassController {
     @Autowired
     private ClassRepository classRepository;
 
+    //create new class
     @RequestMapping(method = RequestMethod.POST, value = "/class")
     public ResponseEntity createClass(@RequestBody Class createdClass) {
 
@@ -29,13 +31,21 @@ public class ClassController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    //update class
     @RequestMapping(method = RequestMethod.PUT, value = "/class/{class_id}")
     public ResponseEntity updateClassOfUser(@RequestBody Class createdClass, @PathVariable("class_id") Integer class_id) {
 
         Class currentClass = classRepository.findClassById(class_id);
+        List<User> listOfUsersInCurrentClass = classRepository.findUserByClass(currentClass.getClass_name());
 
         if (currentClass == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        //update any students belonging to class that is updated
+        for (int i = 0; i < listOfUsersInCurrentClass.size(); i++) {
+            listOfUsersInCurrentClass.get(i).setClass_name(createdClass.getClass_name());
+            classRepository.updateClassOfUser(createdClass.getClass_name(), listOfUsersInCurrentClass.get(i).getId());
         }
 
         currentClass.setClass_name(createdClass.getClass_name());
@@ -44,6 +54,7 @@ public class ClassController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    //get a list of class from specific teacher
     @RequestMapping(method = RequestMethod.GET, value = "/class/list/teacher/{user_id}")
     public ResponseEntity getAllClassesOfTeacher(@PathVariable("user_id") Integer user_id) {
 
