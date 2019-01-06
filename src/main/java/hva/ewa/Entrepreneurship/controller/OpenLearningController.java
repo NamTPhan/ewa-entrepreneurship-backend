@@ -58,9 +58,11 @@ public class OpenLearningController {
         if (currentVideo == null) {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+
         currentVideo.setShow_on_top(openLearningVideo.getShow_on_top());
         currentVideo.setShow_hide(openLearningVideo.getShow_hide());
         currentVideo.setCompetences(openLearningVideo.getCompetences());
+
         openLearningVideoRepository.updateOpenLearningVideo(currentVideo.getShow_on_top(), currentVideo.getShow_hide(), currentVideo.getCompetences(), id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

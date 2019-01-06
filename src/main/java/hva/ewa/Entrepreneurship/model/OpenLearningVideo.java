@@ -5,12 +5,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="openlearningvideo")
+@Table(name = "openlearningvideo")
 public class OpenLearningVideo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="openlearningvideo_id")
+    @Column(name = "openlearningvideo_id")
     private Integer id;
 
     @Size(max = 100)
@@ -19,7 +19,7 @@ public class OpenLearningVideo {
     private String title;
     private String url;
 
-    @Size(max=100000)
+    @Size(max = 100000)
     private String description;
     private String image;
     private String competences;

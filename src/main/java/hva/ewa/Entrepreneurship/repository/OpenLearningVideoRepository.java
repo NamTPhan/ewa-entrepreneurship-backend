@@ -1,6 +1,5 @@
 package hva.ewa.Entrepreneurship.repository;
 
-
 import hva.ewa.Entrepreneurship.model.OpenLearningVideo;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

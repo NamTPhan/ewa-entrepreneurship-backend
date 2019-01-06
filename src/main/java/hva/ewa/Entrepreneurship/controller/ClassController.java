@@ -18,7 +18,7 @@ public class ClassController {
     @Autowired
     private ClassRepository classRepository;
 
-    //create new class
+    // Create new class
     @RequestMapping(method = RequestMethod.POST, value = "/class")
     public ResponseEntity createClass(@RequestBody Class createdClass) {
 
@@ -27,11 +27,10 @@ public class ClassController {
         }
 
         classRepository.save(createdClass);
-
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    //update class
+    // Update class
     @RequestMapping(method = RequestMethod.PUT, value = "/class/{class_id}")
     public ResponseEntity updateClassOfUser(@RequestBody Class createdClass, @PathVariable("class_id") Integer class_id) {
 
@@ -42,7 +41,7 @@ public class ClassController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
-        //update any students belonging to class that is updated
+        // Update any students belonging to class that is updated
         for (int i = 0; i < listOfUsersInCurrentClass.size(); i++) {
             listOfUsersInCurrentClass.get(i).setClass_name(createdClass.getClass_name());
             classRepository.updateClassOfUser(createdClass.getClass_name(), listOfUsersInCurrentClass.get(i).getId());
@@ -54,7 +53,7 @@ public class ClassController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    //get a list of class from specific teacher
+    // Get a list of class from specific teacher
     @RequestMapping(method = RequestMethod.GET, value = "/class/list/teacher/{user_id}")
     public ResponseEntity getAllClassesOfTeacher(@PathVariable("user_id") Integer user_id) {
 

@@ -1,7 +1,6 @@
 package hva.ewa.Entrepreneurship.controller;
 
 import hva.ewa.Entrepreneurship.model.Result;
-import hva.ewa.Entrepreneurship.model.User;
 import hva.ewa.Entrepreneurship.repository.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api")
 public class ResultController {
+
     @Autowired
     private ResultRepository resultRepository;
     private List<Result> resultList, scoreList;
@@ -30,7 +30,6 @@ public class ResultController {
         if (resultRepository.doesUserHasResult(user_id)) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
         resultList = resultRepository.getAllResults(user_id);
 
         return new ResponseEntity(resultList, HttpStatus.OK);
