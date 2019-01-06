@@ -1,11 +1,8 @@
 package hva.ewa.Entrepreneurship.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -34,11 +31,6 @@ public class User implements Serializable {
     private String teacher;
 
     private String class_name;
-
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_id")
-//    @JsonIgnore
-//    private List<User> users;
 
     public Integer getId() {
         return id;

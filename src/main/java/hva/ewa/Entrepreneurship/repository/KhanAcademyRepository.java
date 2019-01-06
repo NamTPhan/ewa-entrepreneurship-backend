@@ -11,7 +11,8 @@ public interface KhanAcademyRepository extends CrudRepository<KhanAcademyVideo, 
 
     @Query("SELECT id, unique_id, title, description, image, url, show_on_top, show_hide, competences, deleted FROM KhanAcademyVideo ")
     List<KhanAcademyVideo> getAllVideos(Integer id, String unique_id, String title, String description,
-                                        String image, String url, Integer show_on_top, Integer show_hide, String competences, Integer deleted);
+                                        String image, String url, Integer show_on_top, Integer show_hide,
+                                        String competences, Integer deleted);
 
     @Query("SELECT u FROM KhanAcademyVideo u WHERE u.id = :video_id")
     KhanAcademyVideo findVideoById(@Param("video_id") Integer video_id);

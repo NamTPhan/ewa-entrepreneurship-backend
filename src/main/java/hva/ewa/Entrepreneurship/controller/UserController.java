@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    //get list of all users
+    // Get list of all users
     @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ResponseEntity retrieveAllUsers(User user) {
 
@@ -30,7 +30,7 @@ public class UserController {
         return new ResponseEntity<>(usersList, HttpStatus.OK);
     }
 
-    //get list of users that are in the same class
+    // Get list of users that are in the same class
     @RequestMapping(method = RequestMethod.GET, value = "/users/class/{class_name}")
     public ResponseEntity retrieveAllUsersOfSameClass(@PathVariable("class_name") String class_name) {
 
@@ -39,7 +39,7 @@ public class UserController {
         return new ResponseEntity(usersFromSameClassList, HttpStatus.OK);
     }
 
-    //get list of teachers and their classes
+    // Get list of teachers and their classes
     @RequestMapping(method = RequestMethod.GET, value = "/users/list/class/list")
     public ResponseEntity retrieveAllTeachersAndClasses() {
 
@@ -55,6 +55,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+
         userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -109,7 +110,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //Can be removed
+    // Can be removed
     @RequestMapping(method = RequestMethod.GET, value = "/users/emails")
     public List<User> existingEmail(User user) {
 

@@ -1,6 +1,5 @@
 package hva.ewa.Entrepreneurship.controller;
 
-
 import hva.ewa.Entrepreneurship.model.AdditionalVideos;
 import hva.ewa.Entrepreneurship.repository.AdditionalVideosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,7 @@ public class AdditionalVideosController {
         video.setCompetence(additionalVideos.getCompetence());
 
         additionalVideosRepository.save(video);
-        System.out.println(video);
+//        System.out.println(video);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

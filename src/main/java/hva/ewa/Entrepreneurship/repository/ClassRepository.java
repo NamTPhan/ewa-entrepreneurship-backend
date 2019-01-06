@@ -1,6 +1,5 @@
 package hva.ewa.Entrepreneurship.repository;
 
-
 import hva.ewa.Entrepreneurship.model.Class;
 import hva.ewa.Entrepreneurship.model.User;
 import org.springframework.data.jpa.repository.Modifying;

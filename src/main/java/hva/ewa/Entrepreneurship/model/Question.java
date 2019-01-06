@@ -1,7 +1,5 @@
 package hva.ewa.Entrepreneurship.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,20 +18,6 @@ public class Question {
 
     @NotNull
     private Integer competence_id;
-
-//    @ManyToOne
-//    @JoinColumn(name = "competence_id", nullable = false)
-//    @JsonIgnore
-//    private Competence competence_id;
-//
-//    public Competence getCompetence_id() {
-//        return competence_id;
-//    }
-//
-//    public void setCompetence_id(Competence competence_id) {
-//        this.competence_id = competence_id;
-//    }
-
 
     public Integer getCompetence_id() {
         return competence_id;

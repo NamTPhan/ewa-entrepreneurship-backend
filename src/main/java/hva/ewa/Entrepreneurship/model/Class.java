@@ -3,11 +3,12 @@ package hva.ewa.Entrepreneurship.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="class")
+@Table(name = "class")
 public class Class {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="class_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "class_id")
     private Integer class_id;
 
     private String class_name;

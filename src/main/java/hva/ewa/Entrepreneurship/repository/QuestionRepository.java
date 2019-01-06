@@ -1,4 +1,5 @@
 package hva.ewa.Entrepreneurship.repository;
+
 import hva.ewa.Entrepreneurship.model.Question;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +12,7 @@ import java.util.List;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
-public interface QuestionRepository extends CrudRepository<Question, Integer>{
+public interface QuestionRepository extends CrudRepository<Question, Integer> {
 
     @Query(nativeQuery = true, value = "(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 4 LIMIT 4)" +
             "UNION ALL(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 5 LIMIT 4)" +
@@ -36,7 +37,7 @@ public interface QuestionRepository extends CrudRepository<Question, Integer>{
     @Transactional
     @Modifying
     @Query("UPDATE Question q SET q.competence_id = ?2 WHERE q.question_id = ?1")
-    Integer updateQuestion(@PathVariable("question_id")Integer question_id, Integer competence_id);
+    Integer updateQuestion(@PathVariable("question_id") Integer question_id, Integer competence_id);
 
     @Query("SELECT q FROM Question q WHERE q.question_id = :question_id")
     Question findQuestionById(@Param("question_id") Integer question_id);
