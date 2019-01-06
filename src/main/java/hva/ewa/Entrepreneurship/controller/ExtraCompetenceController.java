@@ -24,6 +24,7 @@ public class ExtraCompetenceController {
     @RequestMapping(method = RequestMethod.POST, value = "/extracompetence/user")
     public ResponseEntity<?> insertExtraCompetence(@RequestBody ExtraCompetence extraCompetence) {
 
+        //if statement for kijken of de user al een extra competence heeft en anders hem aanmaken of updaten
         extraCompetenceRepository.save(extraCompetence);
         return new ResponseEntity<>(HttpStatus.OK);
     }
