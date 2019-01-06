@@ -41,7 +41,7 @@ public class AdditionalVideosController {
 
         List<AdditionalVideos> listOfAdditionalVideos = additionalVideosRepository.getAllVideos(
                 additionalVideos.getId_video(), additionalVideos.getTitle(), additionalVideos.getDescription()
-                , additionalVideos.getUrl(),additionalVideos.getCompetence());
+                , additionalVideos.getUrl(),additionalVideos.getCompetence(), additionalVideos.getUser_id());
 
         return new ResponseEntity<>(listOfAdditionalVideos, HttpStatus.OK);
     }
