@@ -21,55 +21,44 @@ public class UserController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    //Can be used to populate list of users for admin
-    @RequestMapping(method = RequestMethod.GET, value = "/users/list")
+    // Get list of all users
+    @RequestMapping(method = RequestMethod.GET, value = "/users")
     public ResponseEntity retrieveAllUsers(User user) {
 
-        List<User> listOfUsers = userRepository.listAllUsers(user.getId(), user.getEmail(), user.getFirstname(), user.getLastname(), user.getRole(), user.getTeacher());
+        List<User> usersList = userRepository.listAllUsers(user.getId(), user.getEmail(), user.getFirst_name(), user.getLast_name(), user.getRole(), user.getTeacher(), user.getClass_name());
 
-        return new ResponseEntity<>(listOfUsers, HttpStatus.OK);
+        return new ResponseEntity<>(usersList, HttpStatus.OK);
+    }
+
+    // Get list of users that are in the same class
+    @RequestMapping(method = RequestMethod.GET, value = "/users/class/{class_name}")
+    public ResponseEntity retrieveAllUsersOfSameClass(@PathVariable("class_name") String class_name) {
+
+        List<User> usersFromSameClassList = userRepository.listAllUsersBySameClass(class_name);
+
+        return new ResponseEntity(usersFromSameClassList, HttpStatus.OK);
+    }
+
+    // Get list of teachers and their classes
+    @RequestMapping(method = RequestMethod.GET, value = "/users/list/class/list")
+    public ResponseEntity retrieveAllTeachersAndClasses() {
+
+        List<User> teachersAndClassesList = userRepository.listAllTeachersAndClasses();
+
+        return new ResponseEntity(teachersAndClassesList, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users")
     public ResponseEntity<Void> createUser(@RequestBody User user) {
 
         if (userRepository.doesUserExist(user.getEmail())) {
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+
         userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
-//    @RequestMapping(method = RequestMethod.PUT, value = "/users/update/{userid}")
-//    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("userid") Integer id) {
-//
-//        User currentUser = userRepository.findUserById(id);
-//
-//        if (currentUser == null) {
-//            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-//        }
-//        currentUser.setFirstname(user.getFirstname());
-//        currentUser.setLastname(user.getLastname());
-//        currentUser.setEmail(user.getEmail());
-//        userRepository.updateUser(user.getFirstname(), user.getLastname(), user.getEmail(), id);
-//        return new ResponseEntity<User>(HttpStatus.OK);
-//    }
-
-//    @RequestMapping(method = RequestMethod.POST, value = "/login")
-//    public ResponseEntity<User> login(@RequestBody User user) {
-//
-//        User currentUser = userRepository.findByUserEmail(user.getEmail());
-//
-//        if (currentUser.getEmail().equals(user.getEmail()) && currentUser.getPassword().equals(user.getPassword())) {
-//            return new ResponseEntity<User>(user, HttpStatus.OK);
-//        }
-//        else {
-//            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-//        }
-//
-//
-//    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/users/user/{userid}")
     public ResponseEntity<?> getUser(@PathVariable("userid") Integer id) {
@@ -83,28 +72,53 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    //Can be removed
+    @PutMapping(value = "/users/user/{userid}")
+    public ResponseEntity<User> updateUser(@RequestBody User updateUser, @PathVariable("userid") Integer userid) {
+
+        User user = userRepository.findUserById(userid);
+
+        user.setEmail(updateUser.getEmail());
+        user.setFirst_name(updateUser.getFirst_name());
+        user.setLast_name(updateUser.getLast_name());
+        user.setRole(updateUser.getRole());
+
+        userRepository.save(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/users/user/{userid}/class")
+    public ResponseEntity updateClassOfUser(@RequestBody User updateUser, @PathVariable("userid") Integer userid) {
+
+        User user = userRepository.findUserById(userid);
+
+        if (user == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+
+        user.setClass_name(updateUser.getClass_name());
+        userRepository.save(user);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/users/user/{userid}")
+    public ResponseEntity<User> deleteUser(@PathVariable("userid") Integer userid) {
+
+        User user = userRepository.findUserById(userid);
+
+        userRepository.delete(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // Can be removed
     @RequestMapping(method = RequestMethod.GET, value = "/users/emails")
     public List<User> existingEmail(User user) {
 
         return userRepository.findAllEmail(user.getEmail());
     }
 
-//    @GetMapping("/enterStudent")
-//    @PreAuthorize("hasAnyRole('Student')")
-//    public ResponseEntity<?> enterAsStudent() {
-//        return new ResponseEntity<>("You are student", HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/enterTeacher")
-//    @PreAuthorize("hasAnyRole('Teacher')")
-//    public ResponseEntity<?> enterAsTeacher() {
-//        System.out.println("Responded teacher");
-//        return new ResponseEntity<>("You are teacher", HttpStatus.OK);
-//    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/users/competencetest/{email}")
-    public ResponseEntity findUserIdBasedOnEmail(User user, @PathVariable("email") String email) {
+    @RequestMapping(method = RequestMethod.GET, value = "/users/user/id/{email}")
+    public ResponseEntity findUserIdBasedOnEmail(@PathVariable("email") String email) {
 
         Integer user_id = userRepository.findByUserEmail(email).getId();
 

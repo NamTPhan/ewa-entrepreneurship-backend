@@ -3,6 +3,8 @@ package hva.ewa.Entrepreneurship.controller;
 import hva.ewa.Entrepreneurship.repository.CompetenceRepository;
 import hva.ewa.Entrepreneurship.model.Competence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,27 +20,30 @@ public class CompetenceController {
     @Autowired
     private CompetenceRepository competenceRepository;
 
+    // Get a list of all competences
     @RequestMapping(method = RequestMethod.GET, value = "/competences")
-    public List<Competence> getAllCompetences(Competence competence) {
+    public ResponseEntity getAllCompetences(Competence competence) {
 
         List<Competence> competenceList = competenceRepository.findAllCompetences(competence.getCompetence_id(), competence.getCompetence(), competence.getCompetence_type());
 
-        return competenceList;
+        return new ResponseEntity<>(competenceList, HttpStatus.OK);
     }
 
+    // Get sub competences of all competences
     @RequestMapping(method = RequestMethod.GET, value = "/competences/sub-competences")
-    public List<Competence> getAllSubCompetences(Competence competence) {
+    public ResponseEntity getAllSubCompetences(Competence competence) {
 
         List<Competence> subCompetenceList = competenceRepository.findAllSubCompetences(competence.getCompetence_id(), competence.getCompetence(), competence.getCompetence_type());
 
-        return subCompetenceList;
+        return new ResponseEntity<>(subCompetenceList, HttpStatus.OK);
     }
 
+    // Get main competences of all competences
     @RequestMapping(method = RequestMethod.GET, value = "/competences/main-competences")
-    public List<Competence> getAllMainCompetences(Competence competence) {
+    public ResponseEntity getAllMainCompetences(Competence competence) {
 
         List<Competence> mainCompetenceList = competenceRepository.findAllMainCompetences(competence.getCompetence_id(), competence.getCompetence(), competence.getCompetence_type());
 
-        return mainCompetenceList;
+        return new ResponseEntity<>(mainCompetenceList, HttpStatus.OK);
     }
 }
