@@ -1,6 +1,7 @@
 package hva.ewa.Entrepreneurship.controller;
 
 import hva.ewa.Entrepreneurship.model.KhanAcademyVideo;
+import hva.ewa.Entrepreneurship.repository.ExtraCompetenceRepository;
 import hva.ewa.Entrepreneurship.repository.KhanAcademyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ public class KhanAcademyController {
 
     @Autowired
     private KhanAcademyRepository khanAcademyRepository;
+    private ExtraCompetenceRepository extraCompetenceRepository;
 
     public KhanAcademyController(KhanAcademyRepository khanAcademyRepository) {
         this.khanAcademyRepository = khanAcademyRepository;
@@ -80,8 +82,10 @@ public class KhanAcademyController {
     public ResponseEntity personalListUser(@PathVariable("user_id") Integer user_id) {
 
         List<String> threeCompetences = khanAcademyRepository.getThreeLowestCompetences(user_id);
+        String extraCompetence = extraCompetenceRepository.getExtraCompetence(user_id);
 
-        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.videoMatchLowestCompetences(threeCompetences.get(0), threeCompetences.get(1), threeCompetences.get(2));
+        List<KhanAcademyVideo> khanAcademyVideoList = khanAcademyRepository.videoMatchLowestCompetences(
+                threeCompetences.get(0), threeCompetences.get(1), threeCompetences.get(2), extraCompetence);
 
         return new ResponseEntity<>(khanAcademyVideoList, HttpStatus.OK);
     }

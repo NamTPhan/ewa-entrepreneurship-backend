@@ -22,8 +22,9 @@ public interface KhanAcademyRepository extends CrudRepository<KhanAcademyVideo, 
             "AND competence_id > 3 ORDER BY score DESC) ORDER BY r.score ASC LIMIT 3")
     List<String> getThreeLowestCompetences(@Param("user_id") Integer user_id);
 
-    @Query("SELECT u FROM KhanAcademyVideo u WHERE (competences = ?1 OR competences = ?2 OR competences = ?3) AND show_hide = 1")
-    List<KhanAcademyVideo> videoMatchLowestCompetences(String competence1, String competence2, String competence3);
+    @Query("SELECT u FROM KhanAcademyVideo u WHERE (competences = ?1 OR competences = ?2 OR competences = ?3 " +
+            "OR competences = ?4) AND show_hide = 1")
+    List<KhanAcademyVideo> videoMatchLowestCompetences(String competence1, String competence2, String competence3, String competence4);
 }
 
 
