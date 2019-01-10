@@ -18,7 +18,12 @@ public class ClassController {
     @Autowired
     private ClassRepository classRepository;
 
-    // Create new class
+    /**
+     * save new class to database.
+     *
+     * @param createdClass
+     * @return response with http status when class is successfully saved or when class already exists
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/class")
     public ResponseEntity createClass(@RequestBody Class createdClass) {
 
@@ -30,7 +35,13 @@ public class ClassController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    // Update class
+    /**
+     * update changes to class.
+     *
+     * @param createdClass
+     * @param class_id
+     * @return response with http status when class is successfully updated or when class can't be found
+     */
     @RequestMapping(method = RequestMethod.PUT, value = "/class/{class_id}")
     public ResponseEntity updateClassOfUser(@RequestBody Class createdClass, @PathVariable("class_id") Integer class_id) {
 
@@ -53,7 +64,12 @@ public class ClassController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    // Get a list of class from specific teacher
+    /**
+     * get a list of classes from a specific teacher by their id.
+     *
+     * @param user_id
+     * @return response with http status of a successful retrieval of classes from a specific teacher
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/class/list/teacher/{user_id}")
     public ResponseEntity getAllClassesOfTeacher(@PathVariable("user_id") Integer user_id) {
 

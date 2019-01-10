@@ -23,7 +23,12 @@ public class ResultController {
         this.resultRepository = resultRepository;
     }
 
-    // Get results of user by id
+    /**
+     * get a list of all the sets of results from a specific user by their id.
+     *
+     * @param user_id
+     * @return response with http status when retrieval of all results from a specific user is successful or when user's results can't be found
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/results/user/{user_id}")
     public ResponseEntity<Void> getResults(@PathVariable("user_id") Integer user_id) {
 
@@ -35,7 +40,12 @@ public class ResultController {
         return new ResponseEntity(resultList, HttpStatus.OK);
     }
 
-    // Get results scores of user by id
+    /**
+     * get an ordered list of scores from user's set of results by their id.
+     *
+     * @param user_id
+     * @return response with http status when retrieval of scores from a specific set of results is successful or when user can't be found
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/results/scores/user/{user_id}")
     public ResponseEntity orderResultsScore(@PathVariable("user_id") Integer user_id) {
 
@@ -47,7 +57,12 @@ public class ResultController {
         return new ResponseEntity<>(scoreList, HttpStatus.OK);
     }
 
-    // Save results of competence test
+    /**
+     * save results from the competence test made by user in database.
+     *
+     * @param result
+     * @return response with http status when results are successfully saved to the database
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/results")
     public ResponseEntity<Void> insertScore(@RequestBody Result result) {
 
@@ -55,7 +70,12 @@ public class ResultController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // Get dates of competence test made by user's id
+    /**
+     * get a list of dates of all the set of results from an user by their id.
+     *
+     * @param user_id
+     * @return response with http status of a successful retrieval of dates of results from a specific user
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/results/dates/user/{user_id}")
     public ResponseEntity<Void> getResultsDates(@PathVariable("user_id") Integer user_id) {
 
@@ -64,7 +84,13 @@ public class ResultController {
         return new ResponseEntity(dateList, HttpStatus.OK);
     }
 
-    // Get selected results of user by id and date
+    /**
+     * get a list of scores from a specific set of results that is selected by the user.
+     *
+     * @param user_id
+     * @param date_finished
+     * @return response with http status of a successful retrieval of specific set of results selected by the user.
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/results/dates/date/{date_finished}/user/{user_id}")
     public ResponseEntity<Void> getSelectedTestResults(@PathVariable("user_id") Integer user_id, @PathVariable("date_finished") String date_finished) {
 

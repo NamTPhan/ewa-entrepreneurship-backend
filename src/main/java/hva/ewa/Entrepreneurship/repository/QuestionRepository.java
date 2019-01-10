@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-// This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
-// CRUD refers Create, Read, Update, Delete
 public interface QuestionRepository extends CrudRepository<Question, Integer> {
 
     @Query(nativeQuery = true, value = "(SELECT question_id, description_text, competence_id FROM Question WHERE competence_id = 4 LIMIT 4)" +
