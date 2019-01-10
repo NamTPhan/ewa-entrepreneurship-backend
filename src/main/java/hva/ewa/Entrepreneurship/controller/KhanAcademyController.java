@@ -21,6 +21,12 @@ public class KhanAcademyController {
         this.khanAcademyRepository = khanAcademyRepository;
     }
 
+    /**
+     *save video retrieved from external api Khan Academy into database.
+     *
+     * @param khanAcademyVideo
+     * @return response with http status when video is successfully saved in database
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/khanacademy/video")
     public ResponseEntity insertVideos(@RequestBody KhanAcademyVideo[] khanAcademyVideo) {
 
@@ -34,6 +40,12 @@ public class KhanAcademyController {
         return new ResponseEntity<>(khanAcademyVideo, HttpStatus.OK);
     }
 
+    /**
+     *get a list of all videos.
+     *
+     * @param khanAcademyVideo
+     * @return response with http status when retrieval of videos is successful
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/khanacademy/videolist")
     public ResponseEntity videoList(KhanAcademyVideo khanAcademyVideo) {
 
@@ -52,6 +64,13 @@ public class KhanAcademyController {
         return new ResponseEntity<>(khanAcademyVideoList, HttpStatus.OK);
     }
 
+    /**
+     *update video by id.
+     *
+     * @param khanAcademyVideo
+     * @param video_id
+     * @return response with http status when video is successfully updated
+     */
     @PutMapping(value = "/khanacademy/update/{video_id}")
     public ResponseEntity<KhanAcademyVideo> updateVideoKhan(@RequestBody KhanAcademyVideo khanAcademyVideo, @PathVariable("video_id") Integer video_id) {
 
@@ -65,6 +84,13 @@ public class KhanAcademyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     *update delete attribute of video when it is requested to be deleted from list.
+     *
+     * @param khanAcademyVideo
+     * @param video_id
+     * @return response with http status when the delete attribute of video is successfully updated
+     */
     @PutMapping(value = "/khanacademy/delete/{video_id}")
     public ResponseEntity<KhanAcademyVideo> deleteVideoKhan(@RequestBody KhanAcademyVideo khanAcademyVideo, @PathVariable("video_id") Integer video_id) {
 
@@ -76,6 +102,12 @@ public class KhanAcademyController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     *get a list of videos linked to the competences that user has scored the lowest on.
+     *
+     * @param user_id
+     * @return response with http status of a successful retrieval of videos linked to a specific set of competences from user
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/khanacademy/videolist/{user_id}")
     public ResponseEntity personalListUser(@PathVariable("user_id") Integer user_id) {
 

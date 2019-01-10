@@ -8,12 +8,12 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity // This tells Hibernate to make a table out of this class
+@Entity
 @Table(name = "competence")
 public class Competence implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Does auto increment checked
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(insertable = false, updatable = false)
     private Integer competence_id;
 
@@ -23,15 +23,6 @@ public class Competence implements Serializable {
 
     @NotNull
     private String competence_type;
-
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "competence_id")
-//    @JsonIgnore
-//    private List<Competence> competences;
-
-    //    @OneToMany
-//    @JoinColumn(name = "competence_id")
-//    private List<Question> question;
 
     public Integer getCompetence_id() {
         return competence_id;

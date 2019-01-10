@@ -17,6 +17,12 @@ public class OpenLearningController {
     @Autowired
     private OpenLearningVideoRepository openLearningVideoRepository;
 
+    /**
+     *save videos retrieved from external api OpenLearning into database.
+     *
+     * @param openLearningVideo
+     * @return response with http status when video is successfully saved or when retrieval of video in request is empty
+     */
     @RequestMapping(method = RequestMethod.POST, value = "openlearning/videos")
     public ResponseEntity<?> saveOpenLearningVideo(@RequestBody OpenLearningVideo[] openLearningVideo) {
 
@@ -31,6 +37,12 @@ public class OpenLearningController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     *get video by its id.
+     *
+     * @param id
+     * @return response with http status when retrieval of video is successful or when requested video can't be found
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/openlearning/videos/video/{openlearningvideo_id}")
     public ResponseEntity<?> getVideo(@PathVariable("openlearningvideo_id") Integer id) {
         OpenLearningVideo openLearningVideo = openLearningVideoRepository.findVideoById(id);
@@ -42,6 +54,11 @@ public class OpenLearningController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     *get list of all videos.
+     *
+     * @return response with http status when retrieval of all videos is successful
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/openlearning/videos/list")
     public ResponseEntity retrieveAllOpenLearningVideos() {
 
@@ -50,6 +67,13 @@ public class OpenLearningController {
         return new ResponseEntity<>(videoList, HttpStatus.OK);
     }
 
+    /**
+     *update video by id.
+     *
+     * @param openLearningVideo
+     * @param id
+     * @return response with http status when video is successfully updated or when video requested to be updated can't be found
+     */
     @RequestMapping(method = RequestMethod.PUT, value = "/openlearning/videos/video/{openlearningvideo_id}")
     public ResponseEntity updateOpenLearningVideos(@RequestBody OpenLearningVideo openLearningVideo, @PathVariable("openlearningvideo_id") Integer id) {
 
@@ -67,6 +91,14 @@ public class OpenLearningController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+
+    /**
+     *update delete attribute of video when it is requested to be deleted.
+     *
+     * @param openLearningVideo
+     * @param id
+     * @return response with http status when delete attribute of video is successfully updated or when video requested to be updated can't be found
+     */
     @RequestMapping(method = RequestMethod.PUT, value = "/openlearning/videos/video/deleted/{openlearningvideo_id}")
     public ResponseEntity deleteOpenLearningVideos(@RequestBody OpenLearningVideo openLearningVideo, @PathVariable("openlearningvideo_id") Integer id) {
 
