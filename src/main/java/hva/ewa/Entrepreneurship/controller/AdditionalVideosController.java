@@ -59,15 +59,24 @@ public class AdditionalVideosController {
 //        System.out.println(video);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @DeleteMapping(value = "/additionalvideo/delete/{id_video}")
+    public ResponseEntity<AdditionalVideos> deleteUser(@PathVariable("id_video") Integer id_video) {
 
-    @RequestMapping(value = "/additionalvideo/delete/{id_video}")
-    public ResponseEntity<AdditionalVideos> deleteAdditionalVideos(@PathVariable("id_video") Integer video_id) {
-
-        AdditionalVideos video = additionalVideosRepository.getVideoFromId(video_id);
+        AdditionalVideos video = additionalVideosRepository.getVideoFromId(id_video);
 
         additionalVideosRepository.delete(video);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+//    @RequestMapping(value = "/additionalvideo/delete/{id_video}")
+//    public ResponseEntity<AdditionalVideos> deleteAdditionalVideos(@PathVariable("id_video") Integer video_id) {
+//
+//        AdditionalVideos video = additionalVideosRepository.getVideoFromId(video_id);
+//
+//        additionalVideosRepository.delete(video);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }
 
 
