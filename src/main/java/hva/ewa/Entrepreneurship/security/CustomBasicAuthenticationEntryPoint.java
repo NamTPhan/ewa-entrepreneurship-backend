@@ -10,6 +10,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class CustomBasicAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
+    /**
+     * gives a detailed message when the specified error occurs.
+     *
+     * @param request
+     * @param response
+     * @param authException
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);

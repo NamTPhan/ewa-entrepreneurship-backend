@@ -17,7 +17,12 @@ public class QuestionController {
     @Autowired
     private QuestionRepository questionRepository;
 
-    // Get a list of shuffled questions
+    /**
+     *get a list of shuffled questions.
+     *
+     * @param question
+     * @return response with http status of a successful retrieval of shuffled questions
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/questions/shuffled-questions")
     public ResponseEntity getAllShuffledQuestions(Question question) {
 
@@ -27,12 +32,15 @@ public class QuestionController {
         // Shuffle list of questions
         Collections.shuffle(questionList);
 
-//        System.out.println(questionList.size()); // For testing
-
         return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 
-    // Get a list of all questions
+    /**
+     *get a list of all the questions.
+     *
+     * @param question
+     * @return response with http status of a successful retrieval of questions
+     */
     @RequestMapping(method = RequestMethod.GET, value = "/questions")
     public ResponseEntity getAllQuestions(Question question) {
 
@@ -41,7 +49,12 @@ public class QuestionController {
         return new ResponseEntity<>(questionList, HttpStatus.OK);
     }
 
-    // Save new question
+    /**
+     *save newly added questions to database.
+     *
+     * @param question
+     * @return response with http status when question is successfully saved to database.
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/questions")
     public ResponseEntity createQuestion(@RequestBody Question question) {
 
@@ -50,7 +63,13 @@ public class QuestionController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    // Update competence linked to question
+    /**
+     *update question by id.
+     *
+     * @param question
+     * @param question_id
+     * @return response with http status when question is successfully updated or when question that is requested to be updated can't be found
+     */
     @RequestMapping(method = RequestMethod.PUT, value = "/questions/question/{question_id}")
     public ResponseEntity updateQuestion(@RequestBody Question question, @PathVariable("question_id") Integer question_id) {
 
@@ -64,7 +83,12 @@ public class QuestionController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    // Delete question
+    /**
+     *delete requested question.
+     *
+     * @param question
+     * @return response with http status when question is successfully deleted.
+     */
     @RequestMapping(method = RequestMethod.DELETE, value = "/questions")
     public ResponseEntity deleteQuestion(@RequestBody Question question) {
 

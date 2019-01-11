@@ -21,7 +21,7 @@ public class AdditionalVideosController {
         this.additionalVideosRepository = additionalVideosRepository;
     }
 
-    // This method will be used to retrieve
+    // This method will be used to save video
     @RequestMapping(method = RequestMethod.POST, value = "/additionalvideo/video/insert/")
     public ResponseEntity insertVideo(@RequestBody AdditionalVideos additionalVideos) {
 
@@ -40,11 +40,18 @@ public class AdditionalVideosController {
 
         List<AdditionalVideos> listOfAdditionalVideos = additionalVideosRepository.getAllVideos(
                 additionalVideos.getId_video(), additionalVideos.getTitle(), additionalVideos.getDescription()
-                , additionalVideos.getUrl(),additionalVideos.getCompetence(), additionalVideos.getUser_id());
+                , additionalVideos.getUrl(), additionalVideos.getCompetence(), additionalVideos.getUser_id());
 
         return new ResponseEntity<>(listOfAdditionalVideos, HttpStatus.OK);
     }
 
+    /**
+     * update video by their id.
+     *
+     * @param additionalVideos
+     * @param id_video
+     * @return response with http status when video is successfully updated
+     */
     @PutMapping(value = "/additionalvideo/video/update/{id_video}")
     public ResponseEntity<AdditionalVideos> updateAdditionalVideos(@RequestBody AdditionalVideos additionalVideos, @PathVariable("id_video") Integer id_video) {
 
@@ -56,14 +63,19 @@ public class AdditionalVideosController {
         video.setCompetence(additionalVideos.getCompetence());
 
         additionalVideosRepository.save(video);
-//        System.out.println(video);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/additionalvideo/delete/{id_video}")
-    public ResponseEntity<AdditionalVideos> deleteAdditionalVideos(@PathVariable("id_video") Integer video_id) {
+    /**
+     * delete video by id.
+     *
+     * @param id_video
+     * @return response with http status when video is successfully deleted
+     */
+    @DeleteMapping(value = "/additionalvideo/delete/{id_video}")
+    public ResponseEntity<AdditionalVideos> deleteUser(@PathVariable("id_video") Integer id_video) {
 
-        AdditionalVideos video = additionalVideosRepository.getVideoFromId(video_id);
+        AdditionalVideos video = additionalVideosRepository.getVideoFromId(id_video);
 
         additionalVideosRepository.delete(video);
         return new ResponseEntity<>(HttpStatus.OK);
